@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello World, Battleship!</string>
+    <string name="hello">Battleship!</string>
     <string name="app_name">BattleShip for Android</string>
+    <string name="title">BattleShip for Android</string>
+    <string name="button1">Play</string>
+    <string name="button2">High Score </string>
+    <string name="button3">Quit</string>
 </resources>
