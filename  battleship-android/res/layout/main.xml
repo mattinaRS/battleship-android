@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="50dp">
-    <Button android:layout_width="fill_parent" android:id="@string/button1" android:text="@string/button1" android:layout_height="fill_parent"></Button>
-    <Button android:layout_width="fill_parent" android:id="@string/button2" android:text="@string/button2" android:layout_gravity="fill_horizontal" android:layout_height="match_parent"></Button>
-    <Button android:layout_gravity="fill_horizontal" android:layout_width="fill_parent" android:id="@string/button3" android:text="@string/button3" android:layout_height="match_parent"></Button>
+    <Button android:layout_width="fill_parent" android:text="@string/button1" android:layout_height="fill_parent" android:id="@+id/play"></Button>
+    <Button android:layout_width="fill_parent" android:text="@string/button2" android:layout_gravity="fill_horizontal" android:layout_height="match_parent" android:id="@+id/hiscore"></Button>
+    <Button android:layout_gravity="fill_horizontal" android:layout_width="fill_parent" android:text="@string/button3" android:layout_height="match_parent" android:id="@+id/quit"></Button>
+    <TextView android:layout_height="fill_parent" android:layout_width="fill_parent" android:text="BattleShip For Android" android:id="@+id/testText"></TextView>
 </LinearLayout>
