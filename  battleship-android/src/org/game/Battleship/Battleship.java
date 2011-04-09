@@ -1,6 +1,7 @@
 package org.game.Battleship;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,7 +33,9 @@ public class Battleship extends Activity implements OnClickListener {
 	public void onClick(View src) {
 		switch(src.getId()){
 		case R.id.play:
-			testText.setText("You Pressed Play");
+			Intent myIntent = new Intent(Battleship.this, GameBoard.class);
+			Battleship.this.startActivity(myIntent);
+//			testText.setText("You Pressed Play");
 			break;
 		case R.id.hiscore:
 			testText.setText("You Pressed High Score");
