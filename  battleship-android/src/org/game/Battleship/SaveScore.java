@@ -51,8 +51,8 @@ public class SaveScore extends Activity{
 		
 	public void displayScore()
 	{
-        ArrayList<List> scores = new ArrayList<List>();
-        scores = getscores();
+//        ArrayList<List> scores = new ArrayList<List>();
+//        scores = getscores();
 		Intent hiscore = new Intent(SaveScore.this, HighScore.class);
 		SaveScore.this.startActivity(hiscore);
         //update high scores UI
