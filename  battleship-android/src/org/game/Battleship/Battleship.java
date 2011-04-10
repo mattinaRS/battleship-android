@@ -13,6 +13,7 @@ public class Battleship extends Activity implements OnClickListener {
 	
 	Button buttonPlay, buttonHiscore, buttonQuit;
 	TextView testText;
+	SaveScore score = new SaveScore();
 	
     /** Called when the activity is first created. */
     @Override
@@ -39,7 +40,7 @@ public class Battleship extends Activity implements OnClickListener {
 //			testText.setText("You Pressed Play");
 			break;
 		case R.id.hiscore:
-			testText.setText("You Pressed High Score");
+			score.displayScore();
 			break;
 		case R.id.quit:
 			testText.setText("You Pressed Quit");
