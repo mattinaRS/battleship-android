@@ -13,6 +13,7 @@ public class Battleship extends Activity implements OnClickListener {
 	Button buttonPlay, buttonHiscore, buttonQuit;
 	TextView testText;
 	SaveScore score = new SaveScore();
+	SaveScore sc = new SaveScore();
 	
     /** Called when the activity is first created. */
     @Override
@@ -29,6 +30,10 @@ public class Battleship extends Activity implements OnClickListener {
         buttonHiscore.setOnClickListener(this);
         buttonQuit.setOnClickListener(this);
     }
+    
+    public void onDestroy(Bundle savedInstanceState) {
+        super.onDestroy();
+    }	
 
 	@Override
 	public void onClick(View src) {
@@ -39,10 +44,12 @@ public class Battleship extends Activity implements OnClickListener {
 //			testText.setText("You Pressed Play");
 			break;
 		case R.id.hiscore:
-			score.displayScore();
+			Intent hiscore = new Intent(Battleship.this, HighScore.class);
+			Battleship.this.startActivity(hiscore);
 			break;
 		case R.id.quit:
 			testText.setText("You Pressed Quit");
+			this.finish();
 			break;
 		}		
 	}

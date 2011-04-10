@@ -33,30 +33,4 @@ public class SaveScore extends Activity{
 		
 	}
 	
-	public ArrayList<List> getscores()
-	{
-	    String SELECT_SCORES = "SELECT * FROM " + TABL_NAME;		
-        ArrayList<List> scores = new ArrayList<List>();
-        SQLiteDatabase sqliteDB = dbhelp.getReadableDatabase();
-        Cursor crsr = sqliteDB.rawQuery(SELECT_SCORES, null);
-        crsr.moveToFirst();
-        for (int i = 0; i < crsr.getCount(); i++)
-        {
-            //scores.add(crsr.getString(0), crsr.getString(1)));
-            crsr.moveToNext();
-        }
-
-        return scores;
-    }		
-		
-	public void displayScore()
-	{
-//        ArrayList<List> scores = new ArrayList<List>();
-//        scores = getscores();
-		Intent hiscore = new Intent(SaveScore.this, HighScore.class);
-		SaveScore.this.startActivity(hiscore);
-        //update high scores UI
-        //invoke highscore activity
-	}
-
 }
