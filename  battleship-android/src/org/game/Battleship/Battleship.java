@@ -12,14 +12,13 @@ public class Battleship extends Activity implements OnClickListener {
 	
 	Button buttonPlay, buttonHiscore, buttonQuit;
 	TextView testText;
-	SaveScore score = new SaveScore();
-	SaveScore sc = new SaveScore();
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+    	DBAdapter db = new DBAdapter(this);
         
         buttonPlay = (Button)findViewById(R.id.play);
         buttonHiscore = (Button)findViewById(R.id.hiscore);
