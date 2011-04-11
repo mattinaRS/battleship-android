@@ -11,16 +11,14 @@ import android.util.Log;
 public class DBAdapter
 {
 	private static final String DB_NAME = "battleshipdata";
-	private static final int DB_VERSION = 1;
+	private static final int DB_VERSION = 2;
 	private static final String DB_TABLE = "scores";
 	private static final String KEY_ID = "_id";
 	private static final String PLAYER_NAME = "pname";
 	private static final String SCORE ="score";
 	
-	private static final String DB_CREATE =
-		"create table scores (__id integer primary key autoincrement, "
-		+ "pname text not null, score integer not null);";
-
+	private static final String DB_CREATE = "create table scores (_id integer primary key autoincrement, "
+			+ "pname text not null, score integer not null);";
 	private final Context context; 
 	    
 	private DatabaseHelper DBHelper;

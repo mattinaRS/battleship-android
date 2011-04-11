@@ -13,13 +13,13 @@ public class SaveScore extends Activity{
     private static final String TABL_NAME = "HighScores";
     private static final String COL1 = "name";
     private static final String COL2 = "score";
-    DBHelper dbhelp;
+/*    DBHelper dbhelp;
     
     SaveScore()
     {
     	DBHelper dbhelp = new DBHelper(SaveScore.this, TABL_NAME, COL1 + COL2);
     }
-    
+*/    
 	public void saveScore(int turns, int enemydestroyed, int owndestroyed)
 	{
 		int playerscore;

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent" android:orientation="vertical">
-    <Button android:text="X" android:layout_height="wrap_content" android:id="@+id/button7" android:layout_gravity="right" android:layout_width="wrap_content"></Button>
-    <Button android:text="High-Scores" android:layout_height="wrap_content" android:id="@+id/button2" android:layout_width="match_parent" android:textStyle="bold"></Button>
-    <Button android:text="name1" android:layout_height="wrap_content" android:id="@+id/Button01" android:layout_width="match_parent" android:layout_gravity="left"></Button>
-    <Button android:text="name2" android:layout_height="wrap_content" android:id="@+id/button3" android:layout_width="match_parent"></Button>
-    <Button android:text="name3" android:layout_height="wrap_content" android:id="@+id/button4" android:layout_width="match_parent"></Button>
-    <Button android:text="name4" android:layout_height="wrap_content" android:id="@+id/button5" android:layout_width="match_parent"></Button>
-    <Button android:text="name5" android:layout_height="wrap_content" android:id="@+id/button6" android:layout_width="match_parent"></Button>
-</LinearLayout>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+         android:id = "@+id/RHE"
+         android:layout_width="fill_parent"
+         android:layout_height="fill_parent"
+         android:layout_weight="0"
+         android:padding="5dp">
+
+     <TableRow android:layout_height="fill_parent">
+         <TextView
+             android:id="@+id/runLabel"
+             android:text="HIGH SCORES"
+             android:gravity = "center"
+             android:layout_height="fill_parent"
+             android:layout_width="fill_parent" android:layout_weight="1"/>
+     </TableRow>
+</TableLayout>
