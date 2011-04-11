@@ -3,6 +3,7 @@ package org.game.Battleship;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -12,15 +13,22 @@ public class Battleship extends Activity implements OnClickListener {
 	
 	Button buttonPlay, buttonHiscore, buttonQuit;
 	TextView testText;
-//	DBAdapter db;
+	DBAdapter db;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-//    	DBAdapter db = new DBAdapter(this);
-        
+    	DBAdapter db = new DBAdapter(this);
+    	db.open();
+    	db.deleteallScores();
+    	db.insertScore("SID", 100);
+       	db.insertScore("ABC", 100);
+    	db.insertScore("XYZ", 100);
+       	db.insertScore("DCG", 100);
+        Log.d("Hiscore", "insert");
+        db.close();
         buttonPlay = (Button)findViewById(R.id.play);
         buttonHiscore = (Button)findViewById(R.id.hiscore);
         buttonQuit = (Button)findViewById(R.id.quit);

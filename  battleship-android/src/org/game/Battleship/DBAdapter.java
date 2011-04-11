@@ -76,6 +76,11 @@ public class DBAdapter
 	{
 		return db.delete(DB_TABLE, KEY_ID  + "=" + id, null) > 0;
 	}
+
+	public boolean deleteallScores()
+	{
+		return db.delete(DB_TABLE, null, null) > 0;
+	}
 	
 	public Cursor getallScores()
 	{
