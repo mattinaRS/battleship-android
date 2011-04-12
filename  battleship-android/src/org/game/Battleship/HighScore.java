@@ -14,6 +14,7 @@ public class HighScore extends Activity{
     	super.onCreate(savedInstanceState);
         setContentView(R.layout.highscores);
         TableLayout tbl = (TableLayout)findViewById(R.id.RHE);
+       
     	String name, score;
     	Cursor cursor;
     	db = new DBAdapter(this);
@@ -26,11 +27,15 @@ public class HighScore extends Activity{
         	score = cursor.getString(2);
             TableRow newRow = new TableRow(this);
             TableRow.LayoutParams lp = new TableRow.LayoutParams();
-            lp.gravity = 2;
+            lp.gravity = 3;
+            lp.weight = (float) 0.5;
             lp.setMargins(4, 4, 4, 4);
             TextView cell1 = new TextView(this);
             cell1.setText(name);
             newRow.addView(cell1, lp); 
+            lp.gravity = 3;
+            lp.weight = (float) 0.5;
+            lp.setMargins(4, 4, 4, 4);
             TextView cell2 = new TextView(this);
             cell2.setText(score);
             newRow.addView(cell2); 
