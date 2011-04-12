@@ -24,9 +24,9 @@ public class Battleship extends Activity implements OnClickListener {
     	db.open();
     	db.deleteallScores();
     	db.insertScore("SID", 100);
-       	db.insertScore("ABC", 100);
-    	db.insertScore("XYZ", 100);
-       	db.insertScore("DCG", 100);
+       	db.insertScore("ABC", 12);
+    	db.insertScore("XYZ", 24);
+       	db.insertScore("DCG", 89);
         Log.d("Hiscore", "insert");
         db.close();
         buttonPlay = (Button)findViewById(R.id.play);
