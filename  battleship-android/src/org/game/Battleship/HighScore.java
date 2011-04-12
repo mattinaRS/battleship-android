@@ -26,20 +26,21 @@ public class HighScore extends Activity{
         	name = cursor.getString(1);
         	score = cursor.getString(2);
             TableRow newRow = new TableRow(this);
+            newRow.setBackgroundColor(0xFF000000);
             TableRow.LayoutParams lp = new TableRow.LayoutParams();
-            lp.gravity = 3;
             lp.weight = (float) 0.5;
-            lp.setMargins(4, 4, 4, 4);
+            lp.setMargins(2, 2, 2, 2);
             TextView cell1 = new TextView(this);
             cell1.setText(name);
+            cell1.setTextColor(0xFF000000);
+            cell1.setBackgroundColor(0xFF00FF00);
             newRow.addView(cell1, lp); 
-            lp.gravity = 3;
-            lp.weight = (float) 0.5;
-            lp.setMargins(4, 4, 4, 4);
             TextView cell2 = new TextView(this);
             cell2.setText(score);
-            newRow.addView(cell2); 
-            tbl.addView(newRow, lp);
+            cell2.setTextColor(0xFF000000);
+            cell2.setBackgroundColor(0xFF0000FF);
+            newRow.addView(cell2,lp); 
+            tbl.addView(newRow);
             cursor.moveToNext();
         }
         db.close();
