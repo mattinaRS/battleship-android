@@ -4,7 +4,6 @@ package org.game.Battleship;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -16,7 +15,6 @@ public class HighScore extends Activity{
         setContentView(R.layout.highscores);
         TableLayout tbl = (TableLayout)findViewById(R.id.RHE);
     	String name, score;
-    	long l;
     	Cursor cursor;
     	db = new DBAdapter(this);
         db = db.open();    	
