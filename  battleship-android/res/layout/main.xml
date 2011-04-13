@@ -4,5 +4,4 @@
     <Button android:layout_width="fill_parent" android:text="@string/button1" android:layout_height="fill_parent" android:id="@+id/play"></Button>
     <Button android:layout_width="fill_parent" android:text="@string/button2" android:layout_gravity="fill_horizontal" android:layout_height="match_parent" android:id="@+id/hiscore"></Button>
     <Button android:layout_gravity="fill_horizontal" android:layout_width="fill_parent" android:text="@string/button3" android:layout_height="match_parent" android:id="@+id/quit"></Button>
-    <TextView android:layout_height="fill_parent" android:layout_width="fill_parent" android:text="BattleShip For Android" android:id="@+id/testText"></TextView>
 </LinearLayout>
