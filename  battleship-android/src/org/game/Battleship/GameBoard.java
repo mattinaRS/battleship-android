@@ -1,6 +1,8 @@
 package org.game.Battleship;
  
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.view.View.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,11 +40,12 @@ public class GameBoard extends Activity implements OnClickListener {
 	        {
 	        	dim = main.getWidth();
 	        }
+	        Log.d("Width", Integer.toString(dim));
 	        main.addView(new Grid(this,0,0,dim,dim));
-	        main.addView(new Ship(this,50,50));
+//	        main.addView(new Ship(this,50,50));
 	        buttonDeploy.setEnabled(true);
 			break;
-		case R.id.Deploy:
+			case R.id.Deploy:
 	        buttonEnd.setEnabled(true);
 			break;
 		}		

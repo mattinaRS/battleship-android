@@ -18,7 +18,7 @@ public class losegame extends Activity implements OnClickListener {
         setContentView(R.layout.main);
         
         buttonQuit = (Button)findViewById(R.id.quit);
-        testText = (TextView)findViewById(R.id.testText);
+//        testText = (TextView)findViewById(R.id.testText);
         
         buttonQuit.setOnClickListener(this);
     }

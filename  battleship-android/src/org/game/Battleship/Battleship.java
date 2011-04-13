@@ -7,12 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class Battleship extends Activity implements OnClickListener {
 	
 	Button buttonPlay, buttonHiscore, buttonQuit;
-	TextView testText;
 	DBAdapter db;
 	
     /** Called when the activity is first created. */
@@ -32,7 +30,6 @@ public class Battleship extends Activity implements OnClickListener {
         buttonPlay = (Button)findViewById(R.id.play);
         buttonHiscore = (Button)findViewById(R.id.hiscore);
         buttonQuit = (Button)findViewById(R.id.quit);
-        testText = (TextView)findViewById(R.id.testText);
         
         buttonPlay.setOnClickListener(this);
         buttonHiscore.setOnClickListener(this);
@@ -56,7 +53,6 @@ public class Battleship extends Activity implements OnClickListener {
 			Battleship.this.startActivity(hiscore);
 			break;
 		case R.id.quit:
-			testText.setText("You Pressed Quit");
 			this.finish();
 			break;
 		}		
