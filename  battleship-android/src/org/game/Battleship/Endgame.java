@@ -12,17 +12,21 @@ public class Endgame extends Activity
 	String res = new String();
 	TextView textEnd, textScore;
 	ComputeScore cs;
+	SaveScore sScore;
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {    	
     	Log.d("Endg", "create");
     	res = "You Lose";
+    	sScore = new SaveScore();
     	cs = new ComputeScore();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.endgame);
         textEnd = (TextView)findViewById(R.id.res);
         textScore = (TextView)findViewById(R.id.sc);
         textEnd.setText(res);
-        textScore.setText("Your Score = " + Integer.toString(cs.compute(10, 3, 5)));        
+        sc = cs.compute(10, 3, 5);
+        textScore.setText("Your Score = " + Integer.toString(sc));           
+        sScore.saveScore(sc);
     }	
 }

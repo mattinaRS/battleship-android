@@ -6,15 +6,11 @@ import android.database.Cursor;
 
 public class SaveScore extends Activity{
     DBAdapter db = new DBAdapter(this);
-	ComputeScore sc = new ComputeScore();
     
-	public void saveScore(int turns, int enemydestroyed, int owndestroyed)
+	public void saveScore(int score)
 	{
 		Cursor cursor;
-		int playerscore;
-		playerscore = sc.compute(turns, enemydestroyed, owndestroyed);
-		// read all elements from db
-		cursor = db.getallScores();
+//		cursor = db.getallScores();
 		// compare min to playerscore
 		// if playerscore greater than min
 		// prompt for name
