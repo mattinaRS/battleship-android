@@ -27,5 +27,6 @@
             </intent-filter>
  		</activity>
         <activity android:name="Endgame"></activity>
+        <activity android:name="SaveScore"></activity>
     </application>
 </manifest>
