@@ -3,11 +3,6 @@ package org.game.Battleship;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.text.Editable;
-import android.text.method.KeyListener;
-import android.view.View.OnClickListener;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 
 public class Grid extends View {
