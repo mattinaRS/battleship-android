@@ -14,6 +14,7 @@ public class Endgame extends Activity
 	int sc;
 	static final String tag = new String("Endgame");
 	DBAdapter db;
+	int playerScore;
 	String res = new String();
 	TextView textEnd, textScore;
 	ComputeScore cs;
@@ -39,7 +40,6 @@ public class Endgame extends Activity
 	{
 		Log.d(tag, "in save score");
 		Cursor cursor;
-		final int playerScore;
 		int minScore;
 		playerScore = score;
 		
@@ -47,11 +47,21 @@ public class Endgame extends Activity
 		db.open();
 		Log.d(tag, "DB OPENED");
 		cursor = db.getallScores();
-		db.close();
 		Log.d("savescore", "gotscores");
 		// check if we already have 10 values in db
 		// if not then insert into db
+		cursor.moveToFirst();
+		Log.d(tag, Integer.toString(cursor.getCount()));
+		int count = 0;
+		db.close();
+		while(cursor.isAfterLast() == false)
+		{	
+			count++;
+			cursor.moveToNext();
+		}
+		Log.d("count", Integer.toString(count));
 		if (cursor.getCount() < 10)	{
+			Log.d(tag, "less than 10");			
 			AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		
 			alert.setTitle("You got a HIGH SCORE!");
@@ -79,10 +89,15 @@ public class Endgame extends Activity
 		// compare minScore to playerScore
 		// if playerScore greater than minScore
 		// prompt for name and save player score to db
-		else {
+		else {	
+			db.open();
+			Log.d(tag, "in else");
+			cursor = db.getallScores();
+			cursor.moveToFirst();
 			minScore = cursor.getInt(2);
 			if (playerScore > minScore)
 			{
+				Log.d(tag, "entering score");
 				final long minScoreID = Long.parseLong(cursor.getString(0));
 		
 				//////////////////
@@ -95,7 +110,7 @@ public class Endgame extends Activity
 				final EditText input = new EditText(this);
 				alert.setView(input);
 
-
+				db.close();
 				alert.setPositiveButton("ENTER", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						String playerName = (input.getText()).toString();

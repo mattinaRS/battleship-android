@@ -29,6 +29,11 @@ public class Battleship extends Activity implements OnClickListener {
        	db.insertScore("ABC", 12);
     	db.insertScore("XYZ", 24);
        	db.insertScore("DCG", 89);
+    	db.insertScore("SIf", 100);
+       	db.insertScore("ABg", 12);
+    	db.insertScore("XYh", 24);
+       	db.insertScore("DCk", 89);
+       	db.insertScore("DCkr", 89);
        	
         Log.d("Hiscore", "insert");
         db.close();
@@ -53,27 +58,6 @@ public class Battleship extends Activity implements OnClickListener {
 		case R.id.play:
 			Intent myIntent = new Intent(Battleship.this, GameBoard.class);
 			Battleship.this.startActivity(myIntent);
-	    	final DBAdapter db = new DBAdapter(this);			
-			AlertDialog.Builder alert = new AlertDialog.Builder(this);
-			alert.setTitle("You got a HIGH SCORE!");
-			alert.setMessage("Enter your Name fool!");
-
-			// Set an EditText view to get user input 
-			final EditText input = new EditText(this);
-			alert.setView(input);
-
-			alert.setPositiveButton("ENTER", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int whichButton) {
-				String value = (input.getText()).toString();
-				Log.d("menu", value);
-		    	db.open();
-				db.insertScore(value, 50);
-				db.close();
-			  }
-			});
-
-			alert.show();
-			
 			break;
 		case R.id.hiscore:
 			Intent hiscore = new Intent(Battleship.this, HighScore.class);
