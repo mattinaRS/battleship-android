@@ -65,7 +65,7 @@ public class GameBoard extends Activity implements OnClickListener{
 			Log.d("Board", "ClickGrid1");	
 			break;
 		case R.id.main_view2:
-			grid2.setVals(30, 30, 60, 60);
+			grid2.setVals(40, 40, 80, 80);
 			grid2.invalidate();
 			Log.d("Board", "ClickGrid2");	
 			break;

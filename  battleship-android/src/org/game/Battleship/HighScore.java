@@ -20,8 +20,8 @@ public class HighScore extends Activity{
     	db = new DBAdapter(this);
         db = db.open();    	
         cursor = db.getallScores();
-        cursor.moveToFirst();
-        while(cursor.isAfterLast()== false)
+        cursor.moveToLast();
+        while(cursor.isBeforeFirst()== false)
         {
         	name = cursor.getString(1);
         	score = cursor.getString(2);
@@ -41,7 +41,7 @@ public class HighScore extends Activity{
             cell2.setBackgroundColor(0xFF0000FF);
             newRow.addView(cell2,lp); 
             tbl.addView(newRow);
-            cursor.moveToNext();
+            cursor.moveToPrevious();
         }
         db.close();
     }	

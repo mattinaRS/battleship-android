@@ -36,11 +36,11 @@ public class Grid extends View {
         canvas.drawLine(xStart/2, yStart, xStart/2, yEnd, mPaint);
         lPaint.setColor(0xFFFFFFFF);
         canvas.drawRect(xi, yi, xt, yt, lPaint);
-        for(int i =10; i<xEnd; i=i+10)
+        for(int i =20; i<xEnd; i=i+20)
         {
         	canvas.drawLine(i, yStart, i, yEnd, lPaint);
         }
-        for(int i =10; i<yEnd; i=i+10)
+        for(int i =20; i<yEnd; i=i+20)
         {
         	canvas.drawLine(xStart, i, xEnd, i, lPaint);
         }
