@@ -70,7 +70,15 @@ public class DBAdapter
 		initialvalues.put(SCORE, score);
 		return db.insert(DB_TABLE, null, initialvalues);
 	}
-	
+	/*
+	public long insertName(String pname)
+	{
+		ContentValues initialvalues = new ContentValues();
+		initialvalues.put(PLAYER_NAME, pname);
+		//initialvalues.put(SCORE, score);
+		return db.insert(DB_TABLE, null, initialvalues);
+	}
+	*/
 	public boolean deleteScore(long id)
 	{
 		return db.delete(DB_TABLE, KEY_ID  + "=" + id, null) > 0;
