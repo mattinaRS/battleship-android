@@ -10,13 +10,14 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
-public class Grid extends View implements KeyListener, OnClickListener{
+public class Grid extends View {
     private final float xStart;
     private final float yStart;
     private final float xEnd;
     private final float yEnd;
     private final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
+    float xt, yt, xi, yi;
     public Grid(Context context, float x1, float y1, float x2, float y2) {
         super(context);
         mPaint.setColor(0xFF000000);
@@ -24,6 +25,8 @@ public class Grid extends View implements KeyListener, OnClickListener{
         this.yStart = y1;
         this.xEnd = x2;
         this.yEnd = y2;
+        xt = yt = 20;
+        xi= yi = 10;
     }
     
     public void onDraw(Canvas canvas) {
@@ -32,6 +35,7 @@ public class Grid extends View implements KeyListener, OnClickListener{
         canvas.drawRect(xStart, yStart, xEnd, yEnd, lPaint);
         canvas.drawLine(xStart/2, yStart, xStart/2, yEnd, mPaint);
         lPaint.setColor(0xFFFFFFFF);
+        canvas.drawRect(xi, yi, xt, yt, lPaint);
         for(int i =10; i<xEnd; i=i+10)
         {
         	canvas.drawLine(i, yStart, i, yEnd, lPaint);
@@ -41,35 +45,11 @@ public class Grid extends View implements KeyListener, OnClickListener{
         	canvas.drawLine(xStart, i, xEnd, i, lPaint);
         }
     }
-
-	@Override
-	public void clearMetaKeyState(View arg0, Editable arg1, int arg2) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getInputType() {
-		return 0;
-	}
-
-	@Override
-	public boolean onKeyDown(View arg0, Editable arg1, int arg2, KeyEvent arg3) {
-		return false;
-	}
-
-	@Override
-	public boolean onKeyOther(View arg0, Editable arg1, KeyEvent arg2) {
-		return false;
-	}
-
-	@Override
-	public boolean onKeyUp(View arg0, Editable arg1, int arg2, KeyEvent arg3) {
-		return false;
-	}
-
-	@Override
-	public void onClick(View src) {
-		
-	}
+    public void setVals(float x1,float y1,float x2,float y2)
+    {
+    	xi = x1;
+    	yi= y1;
+    	xt = x2;
+    	yt = y2;
+    }
 }

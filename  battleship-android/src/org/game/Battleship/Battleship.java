@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class Battleship extends Activity implements OnClickListener {
 	
-	Button buttonPlay, buttonHiscore, buttonQuit;
+	Button buttonPlay, buttonHiscore, buttonQuit, buttonEnd;
 	DBAdapter db;
 	
     /** Called when the activity is first created. */
@@ -30,10 +30,12 @@ public class Battleship extends Activity implements OnClickListener {
         buttonPlay = (Button)findViewById(R.id.play);
         buttonHiscore = (Button)findViewById(R.id.hiscore);
         buttonQuit = (Button)findViewById(R.id.quit);
+        buttonEnd = (Button)findViewById(R.id.end);
         
         buttonPlay.setOnClickListener(this);
         buttonHiscore.setOnClickListener(this);
         buttonQuit.setOnClickListener(this);
+        buttonEnd.setOnClickListener(this);
     }
     
     public void onDestroy(Bundle savedInstanceState) {
@@ -46,11 +48,14 @@ public class Battleship extends Activity implements OnClickListener {
 		case R.id.play:
 			Intent myIntent = new Intent(Battleship.this, GameBoard.class);
 			Battleship.this.startActivity(myIntent);
-//			testText.setText("You Pressed Play");
 			break;
 		case R.id.hiscore:
 			Intent hiscore = new Intent(Battleship.this, HighScore.class);
 			Battleship.this.startActivity(hiscore);
+			break;
+		case R.id.end:
+			Intent endg = new Intent(Battleship.this, Endgame.class);
+			Battleship.this.startActivity(endg);
 			break;
 		case R.id.quit:
 			this.finish();
