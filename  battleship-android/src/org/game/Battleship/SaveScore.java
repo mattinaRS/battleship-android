@@ -1,6 +1,5 @@
 package org.game.Battleship;
 
-
 import android.app.Activity;
 import android.database.Cursor;
 
@@ -9,6 +8,7 @@ public class SaveScore extends Activity{
     
 	public void saveScore(int score)
 	{
+		@SuppressWarnings("unused")
 		Cursor cursor;
 //		cursor = db.getallScores();
 		// compare min to playerscore

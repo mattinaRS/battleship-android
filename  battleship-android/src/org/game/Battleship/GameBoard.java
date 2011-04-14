@@ -1,11 +1,7 @@
 package org.game.Battleship;
  
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.view.MotionEvent;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
