@@ -7,10 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
-
-import android.content.DialogInterface;
-import android.app.AlertDialog;
 
 public class Battleship extends Activity implements OnClickListener {
 	
