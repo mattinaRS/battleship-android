@@ -20,7 +20,6 @@ public class GameBoard extends Activity implements OnClickListener{
         buttonDeploy = (Button)findViewById(R.id.Deploy);
         buttonEnd.setOnClickListener(this);
         buttonEnd.setEnabled(false);
-        buttonDeploy.setEnabled(false);
         buttonDeploy.setOnClickListener(this);
         frame =	(FrameLayout)findViewById(R.id.main_view1);
         grid = new Grid(this);
