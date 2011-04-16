@@ -9,39 +9,26 @@
 			android:padding="5dp">
 	
      <TableRow android:layout_height="wrap_content">
-	    <Button android:text="Initialise" 
-	         	android:id = "@+id/Init"
-	    		android:layout_weight="0.2"
-   				android:layout_width="wrap_content" 
-   				android:layout_height="wrap_content" >
-   		</Button>
 	    <Button android:text="End Turn" 
 	         	android:id = "@+id/Turn"
-	    		android:layout_weight="0.4"
+	    		android:layout_weight="0.5"
    				android:layout_width="wrap_content" 
    				android:layout_height="wrap_content" >
    		</Button>
 	    <Button android:layout_height="wrap_content" 
          	android:id = "@+id/Deploy"
 	    		android:layout_width="wrap_content" 
-				android:layout_weight="0.4"
+				android:layout_weight="0.5"
 	    		android:text="End Deployment">
 	    </Button>
      </TableRow>
 	<TableRow android:layout_height="fill_parent" android:layout_weight="1" android:background="#FFFFFFFF">
 		<FrameLayout android:id="@+id/main_view1"
 		  xmlns:android="http://schemas.android.com/apk/res/android"
-		  android:layout_weight="0.5"
+		  android:layout_weight="1"
 		  android:layout_width="fill_parent"
 		  android:layout_height="fill_parent"
 		  android:background="#FF000000" >
 		</FrameLayout>
-		<FrameLayout android:id="@+id/main_view2"
-		  xmlns:android="http://schemas.android.com/apk/res/android"
-		  android:layout_weight="0.5"
-		  android:layout_width="fill_parent"
-		  android:layout_height="fill_parent"
-		  android:background="#FF000000" >
-		</FrameLayout>		
 	</TableRow>
 </TableLayout>
