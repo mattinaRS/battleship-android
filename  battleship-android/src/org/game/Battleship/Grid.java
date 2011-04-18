@@ -68,6 +68,7 @@ public class Grid extends View {
     protected void onDraw(Canvas canvas) 
     {
 	    // Draw the background...
+    	Style style = Paint.Style.STROKE;
 	    Paint background = new Paint();
 	    background.setColor(getResources().getColor(
 	    R.color.puzzle_background));
@@ -75,9 +76,11 @@ public class Grid extends View {
 	    // Draw the board...
 	    // Draw the numbers...
 	    Paint dark = new Paint();
+	    Paint ShipBorder = new Paint();
 	    Paint ShipColor =new Paint();
 	    dark.setColor(getResources().getColor(R.color.puzzle_dark));    
-	    ShipColor.setColor(getResources().getColor(R.color.puzzle_black));    
+	    ShipColor.setColor(getResources().getColor(R.color.puzzle_white));    
+	    ShipBorder.setColor(getResources().getColor(R.color.puzzle_black));    
 	    // Draw the hints...
 	    // Draw the selection...
 	    Paint hilite = new Paint();
@@ -118,7 +121,9 @@ public class Grid extends View {
 			ships.get(i).setRect(ships.get(i).getX(), ships.get(i).getY());
 			Rect r1 = ships.get(i).getHull();
 			Log.d("Shipafter", r1.toString());
+			ShipBorder.setStyle(style);
 			canvas.drawRect((ships.get(i)).getHull(), ShipColor);
+			canvas.drawRect((ships.get(i)).getHull(), ShipBorder);
 		}
     }
     
