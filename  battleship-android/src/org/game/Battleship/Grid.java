@@ -79,7 +79,7 @@ public class Grid extends View {
 	    Paint ShipBorder = new Paint();
 	    Paint ShipColor =new Paint();
 	    dark.setColor(getResources().getColor(R.color.puzzle_dark));    
-	    ShipColor.setColor(getResources().getColor(R.color.puzzle_white));    
+	    ShipColor.setColor(getResources().getColor(R.color.puzzle_dark));    
 	    ShipBorder.setColor(getResources().getColor(R.color.puzzle_black));    
 	    // Draw the hints...
 	    // Draw the selection...
