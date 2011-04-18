@@ -19,7 +19,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 
 public class Grid extends View {
-	private static final String TAG = "Sudoku" ;
+	private static final String TAG = "BattleShip" ;
 	private final GameBoard gameboard;
 	private float width; // width of one tile
 	private float height; // height of one tile
@@ -38,11 +38,11 @@ public class Grid extends View {
 	    	HiList.add(new Rect());
 	    	HiCoord.add(new Point(-1,-1));
 	    }
-    	ships.add(new Ship("Carrier", 0, 0, 5));
-    	ships.add(new Ship("GunBoat", 1, 1, 2));
-    	ships.add(new Ship("Destroyer", 3, 3, 3));
-    	ships.add(new Ship("Submarine",4, 4, 3));
-    	ships.add(new Ship("Battleship", 3, 6, 4));
+    	ships.add(new Ship("Carrier", 0, 0+8, 5));
+    	ships.add(new Ship("GunBoat", 1, 6+8, 2));
+    	ships.add(new Ship("Destroyer", 5, 1+8, 3));
+    	ships.add(new Ship("Submarine",4, 4+8, 3));
+    	ships.add(new Ship("Battleship", 7, 2+8, 4));
     	setFocusable(true);
     	setFocusableInTouchMode(true);
     }
@@ -77,7 +77,7 @@ public class Grid extends View {
 	    Paint dark = new Paint();
 	    Paint ShipColor =new Paint();
 	    dark.setColor(getResources().getColor(R.color.puzzle_dark));    
-	    ShipColor.setColor(getResources().getColor(R.color.puzzle_dark));    
+	    ShipColor.setColor(getResources().getColor(R.color.puzzle_black));    
 	    // Draw the hints...
 	    // Draw the selection...
 	    Paint hilite = new Paint();
@@ -112,7 +112,12 @@ public class Grid extends View {
 		canvas.drawRect(selRect, selected);
 		for(int i =0; i<5;i++)
 		{
-			canvas.drawRect(HiList.get(i), ShipColor);
+			canvas.drawRect(HiList.get(i), dark);
+			Rect r = ships.get(i).getHull();
+			Log.d("Ship", r.toString());
+			ships.get(i).setRect(ships.get(i).getX(), ships.get(i).getY());
+			Rect r1 = ships.get(i).getHull();
+			Log.d("Shipafter", r1.toString());
 			canvas.drawRect((ships.get(i)).getHull(), ShipColor);
 		}
     }
@@ -161,6 +166,7 @@ public class Grid extends View {
     	{
     		if((selX == (HiCoord.get(i)).x) && (selY == (HiCoord.get(i)).y) ) 
     		{
+    			Log.d(TAG, Integer.toString(selX));
     			HiCoord.set(i, new Point(-1, -1));
     	    	getRect(-1, -1, HiList.get(i));
     			invalidate(HiList.get(i));
@@ -182,21 +188,21 @@ public class Grid extends View {
     {
     	private String name;
     	int ix,iy, size;  
-    	Rect hull = new Rect();
+    	Rect hull;
     	
     	public Ship(String n, int x, int y, int sz )
     	{
     		name = new String(n);
+    		hull = new Rect();
     		ix = x;
     		iy =y;
-    		size =sz;
-    		setRect(ix,iy);
+    		size = sz;
     	}
     	
     	public void setRect(int x, int y)
     	{
         	hull.set((int) (x * width), (int) (y * height), (int) (x
-        			* width + width), (int) (y * height*size));    
+        			* width + width), (int) (y*height +height*size));    
     	}
     	
     	public Rect getHull()
@@ -204,6 +210,14 @@ public class Grid extends View {
     		return (new Rect(hull));
     	}
     	
+    	public int getX()
+    	{
+    		return (ix);
+    	}
+    	public int getY()
+    	{
+    		return (iy);
+    	}
     	public int getSize()
     	{
     		return (size);
