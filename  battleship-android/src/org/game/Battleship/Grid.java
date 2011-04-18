@@ -71,22 +71,22 @@ public class Grid extends View {
     	Style style = Paint.Style.STROKE;
 	    Paint background = new Paint();
 	    background.setColor(getResources().getColor(
-	    R.color.puzzle_background));
+	    R.color.battleship_background));
 	    canvas.drawRect(0, 0, getWidth(), getHeight(), background);
 	    // Draw the board...
 	    // Draw the numbers...
 	    Paint dark = new Paint();
 	    Paint ShipBorder = new Paint();
 	    Paint ShipColor =new Paint();
-	    dark.setColor(getResources().getColor(R.color.puzzle_dark));    
-	    ShipColor.setColor(getResources().getColor(R.color.puzzle_dark));    
-	    ShipBorder.setColor(getResources().getColor(R.color.puzzle_black));    
+	    dark.setColor(getResources().getColor(R.color.battleship_dark));    
+	    ShipColor.setColor(getResources().getColor(R.color.battleship_dark));    
+	    ShipBorder.setColor(getResources().getColor(R.color.battleship_black));    
 	    // Draw the hints...
 	    // Draw the selection...
 	    Paint hilite = new Paint();
-	    hilite.setColor(getResources().getColor(R.color.puzzle_hilite));
+	    hilite.setColor(getResources().getColor(R.color.battleship_hilite));
 	    Paint light = new Paint();
-	    light.setColor(getResources().getColor(R.color.puzzle_light));
+	    light.setColor(getResources().getColor(R.color.battleship_light));
 	    // Draw the minor grid lines
 	    for (int i = 0; i < 16; i++) 
 	    {
@@ -111,7 +111,7 @@ public class Grid extends View {
 		Log.d(TAG, "selrect =" + selRect);
 		Paint selected = new Paint();
 		selected.setColor(getResources().getColor(
-		R.color.puzzle_selected));
+		R.color.battleship_selected));
 		canvas.drawRect(selRect, selected);
 		for(int i =0; i<5;i++)
 		{
