@@ -27,6 +27,7 @@ public class Grid extends View {
 	private int selY; // Y index of selection
 	private final Rect selRect = new Rect();
 	private final List<Point> HiCoord = new ArrayList<Point>(5);	
+	private final List<Ship> ships = new ArrayList<Ship>(5);	
 	private final List<Rect> HiList = new ArrayList<Rect>(5);
 	
     public Grid(Context context) {
@@ -37,6 +38,11 @@ public class Grid extends View {
 	    	HiList.add(new Rect());
 	    	HiCoord.add(new Point(-1,-1));
 	    }
+    	ships.add(new Ship("Carrier", 0, 0, 5));
+    	ships.add(new Ship("GunBoat", 1, 1, 2));
+    	ships.add(new Ship("Destroyer", 3, 3, 3));
+    	ships.add(new Ship("Submarine",4, 4, 3));
+    	ships.add(new Ship("Battleship", 3, 6, 4));
     	setFocusable(true);
     	setFocusableInTouchMode(true);
     }
@@ -107,6 +113,7 @@ public class Grid extends View {
 		for(int i =0; i<5;i++)
 		{
 			canvas.drawRect(HiList.get(i), ShipColor);
+			canvas.drawRect((ships.get(i)).getHull(), ShipColor);
 		}
     }
     
@@ -162,13 +169,44 @@ public class Grid extends View {
     	}
     	for(int i=0; i<5;i++)
     	{
-    		if(((HiCoord.get(i)).x == -1) && ((HiCoord.get(i)).y==-1)) 
+    		if(((HiCoord.get(i)).x == -1)) 
     		{
     			HiCoord.set(i, new Point(selX,selY));
     	    	getRect(selX, selY, HiList.get(i));
     	    	invalidate(HiList.get(i));
     			return;    			
     		}
+    	}
+    }
+    private class Ship
+    {
+    	private String name;
+    	int ix,iy, size;  
+    	Rect hull = new Rect();
+    	
+    	public Ship(String n, int x, int y, int sz )
+    	{
+    		name = new String(n);
+    		ix = x;
+    		iy =y;
+    		size =sz;
+    		setRect(ix,iy);
+    	}
+    	
+    	public void setRect(int x, int y)
+    	{
+        	hull.set((int) (x * width), (int) (y * height), (int) (x
+        			* width + width), (int) (y * height*size));    
+    	}
+    	
+    	public Rect getHull()
+    	{
+    		return (new Rect(hull));
+    	}
+    	
+    	public int getSize()
+    	{
+    		return (size);
     	}
     }
 }
