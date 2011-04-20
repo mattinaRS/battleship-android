@@ -29,10 +29,17 @@ public class GameBoard extends Activity implements OnClickListener{
     }
     
 	public void onClick(View src) {
-		switch(src.getId()){
+		switch(src.getId())
+		{
 		case R.id.Deploy:
-	       buttonEnd.setEnabled(true);
-	       break;
+			grid.setDeploy_phase(false);
+			grid.invalidate();
+	        buttonEnd.setEnabled(true);
+	        break;
+		case R.id.Turn:
+			grid.clear_attacksquares();
+			grid.invalidate();
+	        break;
 		}		
 	}
 

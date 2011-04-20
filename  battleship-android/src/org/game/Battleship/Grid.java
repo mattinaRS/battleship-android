@@ -21,6 +21,7 @@ import android.view.animation.AnimationUtils;
 public class Grid extends View {
 	private static final String TAG = "BattleShip" ;
 	private final GameBoard gameboard;
+	private boolean deploy_phase = true;
 	private float width; // width of one tile
 	private float height; // height of one tile
 	private int selX; // X index of selection
@@ -29,7 +30,7 @@ public class Grid extends View {
 	private final List<Point> HiCoord = new ArrayList<Point>(5);	
 	private final List<Ship> ships = new ArrayList<Ship>(5);	
 	private final List<Rect> HiList = new ArrayList<Rect>(5);
-	
+	private int currSelect;
     public Grid(Context context) {
     	super(context);
     	this.gameboard = (GameBoard) context;
@@ -43,11 +44,30 @@ public class Grid extends View {
     	ships.add(new Ship("Destroyer", 5, 1+8, 3));
     	ships.add(new Ship("Submarine",4, 4+8, 3));
     	ships.add(new Ship("Battleship", 7, 2+8, 4));
+    	deploy_phase = true;
+    	currSelect = 0;
     	setFocusable(true);
     	setFocusableInTouchMode(true);
     }
     
-    @Override
+    public void clear_attacksquares()
+    {
+    	for(int i =0; i<5; i++)
+    	{
+    		HiList.get(i).setEmpty();
+    		HiCoord.get(i).set(-1, -1);
+    	}
+    }
+    
+    public boolean isDeploy_phase() {
+		return deploy_phase;
+	}
+
+	public void setDeploy_phase(boolean deploy_phase) {
+		this.deploy_phase = deploy_phase;
+	}
+
+	@Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) 
     {
 	    width = w / 8f;
@@ -105,25 +125,30 @@ public class Grid extends View {
 
 	    canvas.drawLine(0, 8 * height, getWidth(), 8 * height, dark);
 		canvas.drawLine(0, 8 * height + 1, getWidth(), 8 * height + 1, hilite);
-//		canvas.drawRect((3*width+2), (4*height+2), (4*width-2), (5*height-2), ShipColor);
-//		canvas.drawLine(10 * width, 0, 10 * width, getHeight(), dark);
-//		canvas.drawLine(10 * width + 1, 0, 10 * width + 1, getHeight(), hilite);
-		Log.d(TAG, "selrect =" + selRect);
-		Paint selected = new Paint();
-		selected.setColor(getResources().getColor(
-		R.color.battleship_selected));
-		canvas.drawRect(selRect, selected);
 		for(int i =0; i<5;i++)
 		{
 			canvas.drawRect(HiList.get(i), dark);
 			Rect r = ships.get(i).getHull();
 			Log.d("Ship", r.toString());
 			ships.get(i).setRect(ships.get(i).getX(), ships.get(i).getY());
-			Rect r1 = ships.get(i).getHull();
-			Log.d("Shipafter", r1.toString());
-			ShipBorder.setStyle(style);
 			canvas.drawRect((ships.get(i)).getHull(), ShipColor);
-			canvas.drawRect((ships.get(i)).getHull(), ShipBorder);
+		}
+		if(deploy_phase == true)
+		{
+			ShipBorder.setStyle(style);
+			canvas.drawRect((ships.get(currSelect)).getHull(), ShipBorder);
+		}
+		if(deploy_phase == false)
+		{
+			for(int i =0; i<5;i++)
+			{
+				canvas.drawRect(HiList.get(i), dark);
+			}
+			Log.d(TAG, "selrect =" + selRect);
+			Paint selected = new Paint();
+			selected.setColor(getResources().getColor(
+			R.color.battleship_selected));
+			canvas.drawRect(selRect, selected);
 		}
     }
     
@@ -149,6 +174,9 @@ public class Grid extends View {
 		    case KeyEvent.KEYCODE_ENTER:
 		    	highlight();
 		    	break;
+		    case KeyEvent.KEYCODE_TAB:
+		    	switchShip();
+		    	break;
 		    default:
 		    	return super.onKeyDown(keyCode, event);
 	    }
@@ -164,6 +192,20 @@ public class Grid extends View {
     	invalidate(selRect);
     }
 
+    private void switchShip() 
+    {
+    	invalidate((ships.get(currSelect)).getHull());
+    	if(currSelect == 4)
+    	{
+    		currSelect = 0;
+    	}
+    	else
+    	{
+    		currSelect++;
+    	}
+    	invalidate((ships.get(currSelect)).getHull());
+    }
+    
     private void highlight() 
     {
     	invalidate(selRect);
