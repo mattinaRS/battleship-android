@@ -19,6 +19,10 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 
 public class Grid extends View {
+  	public enum Direction 
+  	{
+  		NORTH, EAST, SOUTH, WEST
+  	}
 	private static final String TAG = "BattleShip" ;
 	private final GameBoard gameboard;
 	private boolean deploy_phase = true;
@@ -157,28 +161,54 @@ public class Grid extends View {
     {
 	    Log.d(TAG, "onKeyDown: keycode=" + keyCode + ", event="
 	    + event);
-	    switch (keyCode) 
+	    if(deploy_phase == false)
 	    {
-	    	case KeyEvent.KEYCODE_DPAD_UP:
-	    		select(selX, selY - 1);
-	    		break;
-		    case KeyEvent.KEYCODE_DPAD_DOWN:
-		    	select(selX, selY + 1);
-		    	break;
-		    case KeyEvent.KEYCODE_DPAD_LEFT:
-		    	select(selX - 1, selY);
-		    	break;
-		    case KeyEvent.KEYCODE_DPAD_RIGHT:
-		    	select(selX + 1, selY);
-		    	break;
-		    case KeyEvent.KEYCODE_ENTER:
-		    	highlight();
-		    	break;
-		    case KeyEvent.KEYCODE_TAB:
-		    	switchShip();
-		    	break;
-		    default:
-		    	return super.onKeyDown(keyCode, event);
+		    switch (keyCode) 
+		    {
+		    	case KeyEvent.KEYCODE_DPAD_UP:
+		    		select(selX, selY - 1);
+		    		break;
+			    case KeyEvent.KEYCODE_DPAD_DOWN:
+			    	select(selX, selY + 1);
+			    	break;
+			    case KeyEvent.KEYCODE_DPAD_LEFT:
+			    	select(selX - 1, selY);
+			    	break;
+			    case KeyEvent.KEYCODE_DPAD_RIGHT:
+			    	select(selX + 1, selY);
+			    	break;
+			    case KeyEvent.KEYCODE_ENTER:
+			    	highlight();
+			    	break;
+		    }
+	    }
+	    else
+	    {
+	    	switch(keyCode)
+	    	{
+		    	case KeyEvent.KEYCODE_DPAD_UP:
+		    		(ships.get(currSelect)).animate();
+		    		(ships.get(currSelect)).move();	    		
+		    		break;
+			    case KeyEvent.KEYCODE_DPAD_DOWN:
+		    		(ships.get(currSelect)).animate();
+		    		(ships.get(currSelect)).move();	    		
+			    	break;
+			    case KeyEvent.KEYCODE_DPAD_LEFT:
+		    		(ships.get(currSelect)).animate();
+		    		(ships.get(currSelect)).move();	    		
+			    	break;
+			    case KeyEvent.KEYCODE_DPAD_RIGHT:
+		    		(ships.get(currSelect)).animate();
+		    		(ships.get(currSelect)).move();	    		
+			    	break;
+			    case KeyEvent.KEYCODE_TAB:
+			    	(ships.get(currSelect)).animate();
+		    		(ships.get(currSelect)).move();	    		
+				    break;
+				default:
+				   	return super.onKeyDown(keyCode, event);	    	
+	    	}
 	    }
 	    return true;
     }
@@ -233,6 +263,8 @@ public class Grid extends View {
     }
     private class Ship
     {
+
+ 		private Direction direction = Direction.NORTH;
     	private String name;
     	int ix,iy, size;  
     	Rect hull;
@@ -252,6 +284,15 @@ public class Grid extends View {
         			* width + width), (int) (y*height +height*size));    
     	}
     	
+    	public void move()
+    	{
+    		
+    	}
+    	
+    	public void animate()
+    	{
+    		
+    	}
     	public Rect getHull()
     	{
     		return (new Rect(hull));
