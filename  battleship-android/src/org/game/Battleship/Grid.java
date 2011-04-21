@@ -4,21 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.Paint.FontMetrics;
 import android.graphics.Paint.Style;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 
-public class Grid extends View {
+public class Grid extends View 
+{
   	public enum Direction 
   	{
   		NORTH, EAST, SOUTH, WEST
@@ -32,7 +28,7 @@ public class Grid extends View {
 	private int selY; // Y index of selection
 	private final Rect selRect = new Rect();
 	private final List<Point> HiCoord = new ArrayList<Point>(5);	
-	private final List<Ship> ships = new ArrayList<Ship>(5);	
+	private final List<Ships> ships = new ArrayList<Ships>(5);	
 	private final List<Rect> HiList = new ArrayList<Rect>(5);
 	private int currSelect;
     public Grid(Context context) {
@@ -43,11 +39,11 @@ public class Grid extends View {
 	    	HiList.add(new Rect());
 	    	HiCoord.add(new Point(-1,-1));
 	    }
-    	ships.add(new Ship("Carrier", 0, 0+8, 5));
-    	ships.add(new Ship("GunBoat", 1, 6+8, 2));
-    	ships.add(new Ship("Destroyer", 5, 1+8, 3));
-    	ships.add(new Ship("Submarine",4, 4+8, 3));
-    	ships.add(new Ship("Battleship", 7, 2+8, 4));
+    	ships.add(new Ships("Carrier", 0, 0+8, 5));
+    	ships.add(new Ships("GunBoat", 1, 6+8, 2));
+    	ships.add(new Ships("Destroyer", 5, 1+8, 3));
+    	ships.add(new Ships("Submarine",4, 4+8, 3));
+    	ships.add(new Ships("Battleship", 7, 2+8, 4));
     	deploy_phase = true;
     	currSelect = 0;
     	setFocusable(true);
@@ -134,6 +130,8 @@ public class Grid extends View {
 			canvas.drawRect(HiList.get(i), dark);
 			Rect r = ships.get(i).getHull();
 			Log.d("Ship", r.toString());
+			ships.get(i).setHeight(height);
+			ships.get(i).setWidth(width);
 			ships.get(i).setRect(ships.get(i).getX(), ships.get(i).getY());
 			canvas.drawRect((ships.get(i)).getHull(), ShipColor);
 		}
@@ -187,24 +185,31 @@ public class Grid extends View {
 	    	switch(keyCode)
 	    	{
 		    	case KeyEvent.KEYCODE_DPAD_UP:
-		    		(ships.get(currSelect)).animate();
-		    		(ships.get(currSelect)).move();	    		
+			    	invalidate((ships.get(currSelect)).getHull());
+		    		(ships.get(currSelect)).animate(Direction.NORTH);
+		    		(ships.get(currSelect)).move(Direction.NORTH);	    		
+			    	invalidate((ships.get(currSelect)).getHull());
 		    		break;
 			    case KeyEvent.KEYCODE_DPAD_DOWN:
-		    		(ships.get(currSelect)).animate();
-		    		(ships.get(currSelect)).move();	    		
+			    	invalidate((ships.get(currSelect)).getHull());
+		    		(ships.get(currSelect)).animate(Direction.SOUTH);
+		    		(ships.get(currSelect)).move(Direction.SOUTH);	    		
+			    	invalidate((ships.get(currSelect)).getHull());
 			    	break;
 			    case KeyEvent.KEYCODE_DPAD_LEFT:
-		    		(ships.get(currSelect)).animate();
-		    		(ships.get(currSelect)).move();	    		
+			    	invalidate((ships.get(currSelect)).getHull());
+		    		(ships.get(currSelect)).animate(Direction.WEST);
+		    		(ships.get(currSelect)).move(Direction.WEST);	    		
+			    	invalidate((ships.get(currSelect)).getHull());
 			    	break;
 			    case KeyEvent.KEYCODE_DPAD_RIGHT:
-		    		(ships.get(currSelect)).animate();
-		    		(ships.get(currSelect)).move();	    		
+			    	invalidate((ships.get(currSelect)).getHull());
+		    		(ships.get(currSelect)).animate(Direction.EAST);
+		    		(ships.get(currSelect)).move(Direction.EAST);	    		
+			    	invalidate((ships.get(currSelect)).getHull());
 			    	break;
 			    case KeyEvent.KEYCODE_TAB:
-			    	(ships.get(currSelect)).animate();
-		    		(ships.get(currSelect)).move();	    		
+			    	switchShip();
 				    break;
 				default:
 				   	return super.onKeyDown(keyCode, event);	    	
@@ -259,56 +264,6 @@ public class Grid extends View {
     	    	invalidate(HiList.get(i));
     			return;    			
     		}
-    	}
-    }
-    private class Ship
-    {
-
- 		private Direction direction = Direction.NORTH;
-    	private String name;
-    	int ix,iy, size;  
-    	Rect hull;
-    	
-    	public Ship(String n, int x, int y, int sz )
-    	{
-    		name = new String(n);
-    		hull = new Rect();
-    		ix = x;
-    		iy =y;
-    		size = sz;
-    	}
-    	
-    	public void setRect(int x, int y)
-    	{
-        	hull.set((int) (x * width), (int) (y * height), (int) (x
-        			* width + width), (int) (y*height +height*size));    
-    	}
-    	
-    	public void move()
-    	{
-    		
-    	}
-    	
-    	public void animate()
-    	{
-    		
-    	}
-    	public Rect getHull()
-    	{
-    		return (new Rect(hull));
-    	}
-    	
-    	public int getX()
-    	{
-    		return (ix);
-    	}
-    	public int getY()
-    	{
-    		return (iy);
-    	}
-    	public int getSize()
-    	{
-    		return (size);
     	}
     }
 }
