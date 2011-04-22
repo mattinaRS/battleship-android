@@ -2,6 +2,7 @@ package org.game.Battleship;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Button;
 public class Battleship extends Activity implements OnClickListener {
 	
 	Button buttonPlay, buttonHiscore, buttonQuit, buttonEnd;
+	Point p = new Point();
 	
     /** Called when the activity is first created. */
     @Override
@@ -21,7 +23,6 @@ public class Battleship extends Activity implements OnClickListener {
         buttonHiscore = (Button)findViewById(R.id.hiscore);
         buttonQuit = (Button)findViewById(R.id.quit);
         buttonEnd = (Button)findViewById(R.id.end);
-        
         buttonPlay.setOnClickListener(this);
         buttonHiscore.setOnClickListener(this);
         buttonQuit.setOnClickListener(this);

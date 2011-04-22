@@ -101,13 +101,10 @@ public class Grid extends View
 	    dark.setColor(getResources().getColor(R.color.battleship_dark));    
 	    ShipColor.setColor(getResources().getColor(R.color.battleship_dark));    
 	    ShipBorder.setColor(getResources().getColor(R.color.battleship_black));    
-	    // Draw the hints...
-	    // Draw the selection...
 	    Paint hilite = new Paint();
 	    hilite.setColor(getResources().getColor(R.color.battleship_hilite));
 	    Paint light = new Paint();
 	    light.setColor(getResources().getColor(R.color.battleship_light));
-	    // Draw the minor grid lines
 	    for (int i = 0; i < 16; i++) 
 	    {
 	    	canvas.drawLine(0, i * height, getWidth(), i * height,
@@ -266,4 +263,19 @@ public class Grid extends View
     		}
     	}
     }
+
+	public int[][] getPlayerGrid() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void updateaigrid(int[][] aigrid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateplayergrid(Point p) {
+		// TODO Auto-generated method stub
+		
+	}
 }
