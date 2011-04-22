@@ -32,13 +32,15 @@ public class GameBoard extends Activity implements OnClickListener{
 		switch(src.getId())
 		{
 		case R.id.Deploy:
+	        buttonEnd.setEnabled(true);
 			grid.setDeploy_phase(false);
 			grid.invalidate();
-	        buttonEnd.setEnabled(true);
+	        grid.requestFocus();        
 	        break;
 		case R.id.Turn:
 			grid.clear_attacksquares();
 			grid.invalidate();
+	        grid.requestFocus();        
 	        break;
 		}		
 	}
