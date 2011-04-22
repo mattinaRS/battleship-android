@@ -5,25 +5,29 @@ import android.graphics.Point;
 public class Testai extends Aiplayer {
 
 	@Override
-	public int[][] aiGrid() {
+	public int[][] aiGrid() 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Point attackCell() {
+	public Point attackCell() 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void isHit(boolean hit) {
+	public void isHit(boolean hit) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void setPlayerGrid(int[][] g) {
+	public void setPlayerGrid(int[][] g) 
+	{
 		// TODO Auto-generated method stub
 		
 	}

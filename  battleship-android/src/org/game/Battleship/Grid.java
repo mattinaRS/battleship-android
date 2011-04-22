@@ -21,42 +21,42 @@ public class Grid extends View
   	}
 	private static final String TAG = "BattleShip" ;
 	private final GameBoard gameboard;
+	private final int numrows = 10;
+	private final int numcols = 10;
+	private final int numships = 5;
 	private boolean deploy_phase = true;
 	private float width; // width of one tile
 	private float height; // height of one tile
 	private int selX; // X index of selection
 	private int selY; // Y index of selection
 	private final Rect selRect = new Rect();
-	private final List<Point> HiCoord = new ArrayList<Point>(5);	
-	private final List<Ships> ships = new ArrayList<Ships>(5);	
-	private final List<Rect> HiList = new ArrayList<Rect>(5);
+	private final List<Point> HiCoord = new ArrayList<Point>(1);	
+	private final List<Ships> ships = new ArrayList<Ships>(numships);	
+	private final List<Rect> HiList = new ArrayList<Rect>(1);
 	private int currSelect;
     public Grid(Context context) {
     	super(context);
     	this.gameboard = (GameBoard) context;
-	    for(int i =0; i< 5; i++)
-	    {
-	    	HiList.add(new Rect());
-	    	HiCoord.add(new Point(-1,-1));
-	    }
-    	ships.add(new Ships("Carrier", 0, 0+8, 5));
-    	ships.add(new Ships("GunBoat", 1, 6+8, 2));
-    	ships.add(new Ships("Destroyer", 5, 1+8, 3));
-    	ships.add(new Ships("Submarine",4, 4+8, 3));
-    	ships.add(new Ships("Battleship", 7, 2+8, 4));
+    	HiList.add(new Rect());
+    	HiCoord.add(new Point(-1,-1));
+    	ships.add(new Ships("Carrier", 0, 0+10, 5));
+    	ships.add(new Ships("GunBoat", 1, 6+10, 2));
+    	ships.add(new Ships("Destroyer", 5, 1+10, 3));
+    	ships.add(new Ships("Submarine",4, 4+10, 3));
+    	ships.add(new Ships("Battleship", 7, 2+10, 4));
     	deploy_phase = true;
     	currSelect = 0;
     	setFocusable(true);
     	setFocusableInTouchMode(true);
     }
     
-    public void clear_attacksquares()
+    public Point updateaigrid(int[][] aigrid)
     {
-    	for(int i =0; i<5; i++)
-    	{
-    		HiList.get(i).setEmpty();
-    		HiCoord.get(i).set(-1, -1);
-    	}
+    	Point p = new Point();
+    	p = HiCoord.get(0);
+    	HiList.get(0).setEmpty();
+   		HiCoord.get(0).set(-1, -1);
+   		return p;
     }
     
     public boolean isDeploy_phase() {
@@ -70,8 +70,8 @@ public class Grid extends View
 	@Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) 
     {
-	    width = w / 8f;
-	    height = h / 16f;
+	    width = w / 10f;
+	    height = h / 20f;
 	    getRect(selX, selY, selRect);
 	    Log.d(TAG, "onSizeChanged: width " + width + ", height "
 	    + height);
@@ -105,14 +105,14 @@ public class Grid extends View
 	    hilite.setColor(getResources().getColor(R.color.battleship_hilite));
 	    Paint light = new Paint();
 	    light.setColor(getResources().getColor(R.color.battleship_light));
-	    for (int i = 0; i < 16; i++) 
+	    for (int i = 0; i < 2*numrows; i++) 
 	    {
 	    	canvas.drawLine(0, i * height, getWidth(), i * height,
 	    			light);
 	    	canvas.drawLine(0, i * height + 1, getWidth(), i * height
 	    			+ 1, hilite);
 	    }
-	    for (int i = 0; i < 8; i++) 
+	    for (int i = 0; i <(numcols); i++) 
 	    {
 	    	canvas.drawLine(i * width, 0, i * width, getHeight(),
 	    			light);
@@ -120,11 +120,11 @@ public class Grid extends View
 		    getHeight(), hilite);
 	    }
 
-	    canvas.drawLine(0, 8 * height, getWidth(), 8 * height, dark);
-		canvas.drawLine(0, 8 * height + 1, getWidth(), 8 * height + 1, hilite);
-		for(int i =0; i<5;i++)
+	    canvas.drawLine(0, numrows * height, getWidth(), numrows * height, dark);
+		canvas.drawLine(0, numrows * height + 1, getWidth(), numrows * height + 1, hilite);
+//		canvas.drawRect(HiList.get(0), dark);
+		for(int i =0; i<numships;i++)
 		{
-			canvas.drawRect(HiList.get(i), dark);
 			Rect r = ships.get(i).getHull();
 			Log.d("Ship", r.toString());
 			ships.get(i).setHeight(height);
@@ -139,10 +139,7 @@ public class Grid extends View
 		}
 		if(deploy_phase == false)
 		{
-			for(int i =0; i<5;i++)
-			{
-				canvas.drawRect(HiList.get(i), dark);
-			}
+			canvas.drawRect(HiList.get(0), dark);
 			Log.d(TAG, "selrect =" + selRect);
 			Paint selected = new Paint();
 			selected.setColor(getResources().getColor(
@@ -218,8 +215,8 @@ public class Grid extends View
     private void select(int x, int y) 
     {
     	invalidate(selRect);
-    	selX = Math.min(Math.max(x, 0), 7);
-    	selY = Math.min(Math.max(y, 0), 7);
+    	selX = Math.min(Math.max(x, 0), 2*numrows);
+    	selY = Math.min(Math.max(y, 0), numcols);
     	getRect(selX, selY, selRect);
     	invalidate(selRect);
     }
@@ -227,7 +224,7 @@ public class Grid extends View
     private void switchShip() 
     {
     	invalidate((ships.get(currSelect)).getHull());
-    	if(currSelect == 4)
+    	if(currSelect == numships-1)
     	{
     		currSelect = 0;
     	}
@@ -241,40 +238,31 @@ public class Grid extends View
     private void highlight() 
     {
     	invalidate(selRect);
-    	for(int i=0; i<5;i++)
+   		if((selX == (HiCoord.get(0)).x) && (selY == (HiCoord.get(0)).y) ) 
+   		{
+   			Log.d(TAG, Integer.toString(selX));
+   			HiCoord.set(0, new Point(-1, -1));
+   	    	getRect(-1, -1, HiList.get(0));
+   			invalidate(HiList.get(0));
+   			return;
+   		}
+    	if(((HiCoord.get(0)).x == -1)) 
     	{
-    		if((selX == (HiCoord.get(i)).x) && (selY == (HiCoord.get(i)).y) ) 
-    		{
-    			Log.d(TAG, Integer.toString(selX));
-    			HiCoord.set(i, new Point(-1, -1));
-    	    	getRect(-1, -1, HiList.get(i));
-    			invalidate(HiList.get(i));
-    			return;
-    		}
-    	}
-    	for(int i=0; i<5;i++)
-    	{
-    		if(((HiCoord.get(i)).x == -1)) 
-    		{
-    			HiCoord.set(i, new Point(selX,selY));
-    	    	getRect(selX, selY, HiList.get(i));
-    	    	invalidate(HiList.get(i));
-    			return;    			
-    		}
+    		HiCoord.set(0, new Point(selX,selY));
+    	   	getRect(selX, selY, HiList.get(0));
+    	   	invalidate(HiList.get(0));
+    		return;    			
     	}
     }
 
-	public int[][] getPlayerGrid() {
+	public int[][] getPlayerGrid() 
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void updateaigrid(int[][] aigrid) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void updateplayergrid(Point p) {
+	public void updateplayergrid(Point p) 
+	{
 		// TODO Auto-generated method stub
 		
 	}

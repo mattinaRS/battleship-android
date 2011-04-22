@@ -9,15 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
  
-public class GameBoard extends Activity implements OnClickListener{
+public class GameBoard extends Activity implements OnClickListener
+{
 	Button buttonEnd, buttonDeploy;
 	Grid grid;
 	FrameLayout frame; 
 	Aiplayer ai;
 	int[][] aigrid, playergrid;
-	private Point p;
+	private Point aiCell, plCell;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) 
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameboard);
         buttonEnd = (Button)findViewById(R.id.Turn);
@@ -29,7 +31,8 @@ public class GameBoard extends Activity implements OnClickListener{
         grid = new Grid(this);
         aigrid = new int[10][10];
         playergrid = new int[10][10];
-        p = new Point();
+        aiCell = new Point();
+        plCell = new Point();
         ai = new Testai();
         aigrid = ai.aiGrid();
         frame.addView(grid);        
@@ -47,17 +50,25 @@ public class GameBoard extends Activity implements OnClickListener{
 	        grid.requestFocus();        
 	        break;
 		case R.id.Turn:			
-			grid.updateaigrid(aigrid);
-			updateaigrid();
-			p = ai.attackCell();
-			grid.updateplayergrid(p);			
+			plCell = grid.updateaigrid(aigrid);
+			updateAigrid(plCell);
+			aiCell = ai.attackCell();
+			grid.updateplayergrid(aiCell);			
+			updatePlayergrid(aiCell);
 			grid.invalidate();
 	        grid.requestFocus();        
 	        break;
 		}		
 	}
 
-	private void updateaigrid() {
+	private void updatePlayergrid(Point p) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void updateAigrid(Point p) 
+	{
 		// TODO Auto-generated method stub
 		
 	}
