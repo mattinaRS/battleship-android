@@ -29,19 +29,21 @@ public class Grid extends View
 	private float height; // height of one tile
 	private int selX; // X index of selection
 	private int selY; // Y index of selection
-	private int[][] pgrid;
+	private int[][] pgrid, aigrid;
 	private final Rect selRect = new Rect();
 	private final List<Point> HiCoord = new ArrayList<Point>(1);	
 	private final List<Ships> ships = new ArrayList<Ships>(numships);	
 	private final List<Rect> HiList = new ArrayList<Rect>(1);
 	private final List<Rect> HitMiss = new ArrayList<Rect>(100);
 	private final int[] target = new int[100];
-	int turns;
+	private final List<Rect> HitMissAI = new ArrayList<Rect>(100);
+	private final int[] targetAI = new int[100];
+	private Point p = new Point();
 	private int currSelect;
     public Grid(Context context) {
     	super(context);
-    	turns = 0;
     	this.gameboard = (GameBoard) context;
+    	aigrid = new int[10][10];
     	HiList.add(new Rect());
     	HiCoord.add(new Point(-1,-1));
     	ships.add(new Ships(1, 0, 0+10, 5));
@@ -103,9 +105,9 @@ public class Grid extends View
     	y = p.y + 10;
     	Log.d("y", Integer.toString(y));
 		Rect r  = new Rect();
+		Rect sel = new Rect();
     	if(pgrid[p.x][p.y] == 0)
     	{
-        	Log.d("UI", "MISS");
     		getRect(x,y, r);
     		HitMiss.add(r);
     		target[HitMiss.size()] = 0;
@@ -113,7 +115,20 @@ public class Grid extends View
     	}
     	else
     	{
-        	Log.d("UI", "HIT");
+    		getRect(x,y, sel);
+    		HitMiss.add(sel);    		
+    		target[HitMiss.size()] = 1;
+    		invalidate(sel);
+    	}
+    	if(aigrid[selX][selY] == 0)
+    	{
+    		getRect(selX,selY, r);
+    		HitMissAI.add(r);
+    		targetAI[HitMissAI.size()] = 0;
+    		invalidate(r);
+    	}
+    	else
+    	{
     		getRect(x,y, r);
     		HitMiss.add(r);    		
     		target[HitMiss.size()] = 1;
@@ -221,11 +236,11 @@ public class Grid extends View
 			R.color.battleship_selected));
 			canvas.drawRect(selRect, selected);
 			Rect r = new Rect();
+			Rect sel = new Rect();
 			Log.d("Hit", Integer.toString(HitMiss.size()));
 			for(int i=0; i<HitMiss.size(); i++)
 			{
 				r = HitMiss.get(i);
-				Log.d(TAG, r.toString());
 				if(target[i] ==0)
 				{
 					canvas.drawRect(r, miss);
@@ -233,6 +248,19 @@ public class Grid extends View
 				else
 				{
 					canvas.drawRect(r, hit);
+				}					
+			}
+
+			for(int i=0; i<HitMissAI.size(); i++)
+			{
+				sel = HitMissAI.get(i);
+				if(targetAI[i] ==0)
+				{
+					canvas.drawRect(sel, miss);
+				}
+				else
+				{
+					canvas.drawRect(sel, hit);
 				}
 					
 			}
