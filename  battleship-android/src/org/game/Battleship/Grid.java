@@ -35,9 +35,9 @@ public class Grid extends View
 	private final List<Ships> ships = new ArrayList<Ships>(numships);	
 	private final List<Rect> HiList = new ArrayList<Rect>(1);
 	private final List<Rect> HitMiss = new ArrayList<Rect>(100);
-	private final int[] target = new int[100];
+	private final List<Integer> target = new ArrayList<Integer>(100);
 	private final List<Rect> HitMissAI = new ArrayList<Rect>(100);
-	private final int[] targetAI = new int[100];
+	private final List<Integer> targetAI = new ArrayList<Integer>(100);
 	private Point p = new Point();
 	private int currSelect;
     public Grid(Context context) {
@@ -78,8 +78,8 @@ public class Grid extends View
     		y = ships.get(i).getY();
     		ordy = y - 10;
     		ordx = x;
-    		Log.d("ORDY", Integer.toString(ordy));
-    		Log.d("ORDX", Integer.toString(ordx));
+//   		Log.d("ORDY", Integer.toString(ordy));
+//   		Log.d("ORDX", Integer.toString(ordx));
     		size = ships.get(i).getSize();
     		d = ships.get(i).getDirection();
    			switch(d)
@@ -87,7 +87,6 @@ public class Grid extends View
    			case NORTH:
    	    		for(int j =0; j<size; j++)
    	    		{
-   	    			Log.d("NORTH", Integer.toString(size));
    	    			pgrid[ordx][ordy] = ships.get(i).getName();
    	    			ordy++;
    	    		}
@@ -95,7 +94,6 @@ public class Grid extends View
    			case EAST:
    	    		for(int j =0; j<size; j++)
    	    		{
-   	    			Log.d("EAST", Integer.toString(size));
    	    			pgrid[ordx][ordy] = ships.get(i).getName();
    	    			ordx++;
    	    		}
@@ -107,39 +105,40 @@ public class Grid extends View
     
     public void updateUIonattk(Point p)
     {
-    	Log.d("UI", "UpdatUi called");
     	int x, y;
     	x = p.x;
     	y = p.y + 10;
-    	Log.d("y", Integer.toString(y));
 		Rect r  = new Rect();
 		Rect sel = new Rect();
     	if(pgrid[p.x][p.y] == 0)
     	{
     		getRect(x,y, r);
     		HitMiss.add(r);
-    		target[HitMiss.size()] = 0;
+    		target.add(0);
     		invalidate(r);
     	}
     	else
     	{
     		getRect(x,y, r);
     		HitMiss.add(r);    		
-    		target[HitMiss.size()] = 1;
+    		target.add(1);
     		invalidate(r);
     	}
     	if(aigrid[selX][selY] == 0)
     	{
-    		getRect(selX,selY, sel);
+    		Point point = new Point(HiCoord.get(0));
+        	HiList.get(0).setEmpty();
+       		HiCoord.get(0).set(-1, -1);
+    		getRect(point.x,point.y, sel);
     		HitMissAI.add(sel);
-    		targetAI[HitMissAI.size()] = 0;
+    		targetAI.add(0);
     		invalidate(sel);
     	}
     	else
     	{
     		getRect(x,y, sel);
     		HitMiss.add(sel);    		
-    		target[HitMiss.size()] = 1;
+    		target.add(1);
     		invalidate(sel);
     	}
     }
@@ -148,8 +147,6 @@ public class Grid extends View
     {
     	Point p = new Point();
     	p = HiCoord.get(0);
-    	HiList.get(0).setEmpty();
-   		HiCoord.get(0).set(-1, -1);
    		return p;
     }
     
@@ -167,8 +164,6 @@ public class Grid extends View
 	    width = w / 10f;
 	    height = h / 20f;
 	    getRect(selX, selY, selRect);
-	    Log.d(TAG, "onSizeChanged: width " + width + ", height "
-	    + height);
 	    super.onSizeChanged(w, h, oldw, oldh);
 	}
     
@@ -224,7 +219,6 @@ public class Grid extends View
 		for(int i =0; i<numships;i++)
 		{
 			Rect r = ships.get(i).getHull();
-			Log.d("Ship", r.toString());
 			ships.get(i).setHeight(height);
 			ships.get(i).setWidth(width);
 			ships.get(i).setRect(ships.get(i).getX(), ships.get(i).getY());
@@ -238,18 +232,16 @@ public class Grid extends View
 		if(deploy_phase == false)
 		{
 			canvas.drawRect(HiList.get(0), dark);
-			Log.d(TAG, "selrect =" + selRect);
 			Paint selected = new Paint();
 			selected.setColor(getResources().getColor(
 			R.color.battleship_selected));
 			canvas.drawRect(selRect, selected);
 			Rect r = new Rect();
 			Rect sel = new Rect();
-			Log.d("Hit", Integer.toString(HitMiss.size()));
 			for(int i=0; i<HitMiss.size(); i++)
 			{
 				r = HitMiss.get(i);
-				if(target[i] ==0)
+				if(target.get(i) ==0)
 				{
 					canvas.drawRect(r, miss);
 				}
@@ -262,7 +254,7 @@ public class Grid extends View
 			for(int i=0; i<HitMissAI.size(); i++)
 			{
 				sel = HitMissAI.get(i);
-				if(targetAI[i] ==0)
+				if(targetAI.get(i)==0)
 				{
 					canvas.drawRect(sel, miss);
 				}
@@ -279,8 +271,8 @@ public class Grid extends View
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) 
     {
-	    Log.d(TAG, "onKeyDown: keycode=" + keyCode + ", event="
-	    + event);
+//	    Log.d(TAG, "onKeyDown: keycode=" + keyCode + ", event="
+//	    + event);
 	    if(deploy_phase == false)
 	    {
 		    switch (keyCode) 
@@ -368,7 +360,7 @@ public class Grid extends View
     	invalidate(selRect);
    		if((selX == (HiCoord.get(0)).x) && (selY == (HiCoord.get(0)).y) ) 
    		{
-   			Log.d(TAG, Integer.toString(selX));
+//  			Log.d(TAG, Integer.toString(selX));
    			HiCoord.set(0, new Point(-1, -1));
    	    	getRect(-1, -1, HiList.get(0));
    			invalidate(HiList.get(0));

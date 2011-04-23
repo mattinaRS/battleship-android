@@ -11,6 +11,6 @@
 <color name="battleship_hint_1">#6400ff80</color>
 <color name="battleship_hint_2">#2000ff80</color>
 <color name="battleship_selected">#64ff8000</color>
-<color name="battleship_hit">#640000ff</color>
-<color name="battleship_miss">#64ff0000</color>
+<color name="battleship_hit">#FF0000ff</color>
+<color name="battleship_miss">#FFff0000</color>
 </resources>

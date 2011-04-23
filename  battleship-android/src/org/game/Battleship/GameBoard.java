@@ -49,27 +49,22 @@ public class GameBoard extends Activity implements OnClickListener
 		switch(src.getId())
 		{
 		case R.id.Deploy:
-	        Log.d(TAG, "Deployment ends");
+//	        Log.d(TAG, "Deployment ends");
 			playergrid = grid.getPlayerGrid();
 	        buttonEnd.setEnabled(true);
 	        playergrid = grid.getPgrid();
 //	        grid.setAigrid(aigrid);
-	        Log.d(TAG, playergrid.toString());
+//	        Log.d(TAG, playergrid.toString());
 			grid.setDeploy_phase(false);
 			grid.invalidate();
 	        grid.requestFocus();        
 	        break;
 		case R.id.Turn:			
-	        Log.d(TAG, "Turn ends");
+//	        Log.d(TAG, "Turn ends");
 			plCell = grid.updateaigrid(aigrid);
 			updateAigrid(plCell);
-			Log.d(TAG, "before calling AI attack");
 			aiCell = ai.aiAttack();
-			Log.d("aicell", Integer.toString(aiCell.x));
-			Log.d("aicell", Integer.toString(aiCell.y));
-			Log.d(TAG, "after calling AI attack");
 			grid.updateUIonattk(aiCell);			
-	        Log.d(TAG, "Update UI called");
 			updatePlayergrid(aiCell);
 			grid.invalidate();
 	        grid.requestFocus();        
