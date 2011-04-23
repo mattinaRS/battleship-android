@@ -75,6 +75,7 @@ public class GameBoard extends Activity implements OnClickListener
 			{
 				ai.isHit(true);
 			}
+			
 			grid.updateUIonattk(aiCell);			
 	        Log.d(TAG, "Update UI called");
 			updatePlayergrid(aiCell);
@@ -86,7 +87,6 @@ public class GameBoard extends Activity implements OnClickListener
 
 	public void updatePlayergrid(Point p) 
 	{
-		// TODO Auto-generated method stub
 		//endgame = true;
 		if(endgame == true)
 		{
@@ -98,7 +98,6 @@ public class GameBoard extends Activity implements OnClickListener
 
 	private void updateAigrid(Point p) 
 	{
-		// TODO Auto-generated method stub
 		if(endgame == true)
 		{
 	        Log.d(TAG, "Game ends");

@@ -126,9 +126,9 @@ public class Grid extends View
     		invalidate(r);
     	}
     	
-		Point point = new Point(HiCoord.get(0));
-    	if(aigrid[point.x][point.y] == 0)
+    	if(aigrid[selX][selY] == 0)
     	{
+    		Point point = new Point(HiCoord.get(0));
         	HiList.get(0).setEmpty();
        		HiCoord.get(0).set(-1, -1);
     		getRect(point.x,point.y, sel);
