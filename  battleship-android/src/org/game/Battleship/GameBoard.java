@@ -51,7 +51,7 @@ public class GameBoard extends Activity implements OnClickListener
 		switch(src.getId())
 		{
 		case R.id.Deploy:
-//	        Log.d(TAG, "Deployment ends");
+	        Log.d(TAG, "Deployment ends");
 			playergrid = grid.getPlayerGrid();
 	        buttonEnd.setEnabled(true);
 	        playergrid = grid.getPgrid();
@@ -62,11 +62,15 @@ public class GameBoard extends Activity implements OnClickListener
 	        grid.requestFocus();        
 	        break;
 		case R.id.Turn:			
-//	        Log.d(TAG, "Turn ends");
+	        Log.d(TAG, "Turn ends");
 			plCell = grid.updateaigrid(aigrid);
 			updateAigrid(plCell);
+			Log.d(TAG, "before calling AI attack");
 			aiCell = ai.aiAttack();
-			if(playergrid[aiCell.x][aiCell.y] == 0)
+			Log.d("aicell", Integer.toString(aiCell.x));
+			Log.d("aicell", Integer.toString(aiCell.y));
+			Log.d(TAG, "after calling AI attack");
+			if(playergrid[aiCell.x][aiCell.y] ==0)
 			{
 				ai.isHit(false);				
 			}
@@ -75,6 +79,7 @@ public class GameBoard extends Activity implements OnClickListener
 				ai.isHit(true);
 			}
 			grid.updateUIonattk(aiCell);			
+	        Log.d(TAG, "Update UI called");
 			updatePlayergrid(aiCell);
 			grid.invalidate();
 	        grid.requestFocus();        
