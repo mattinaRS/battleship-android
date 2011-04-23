@@ -7,14 +7,14 @@ import android.graphics.Rect;
 public class Ships
 {
 	private Direction direction = Direction.NORTH;
-	private String name;
+	private int name;
 	int ix,iy, size;  
 	Rect hull;
 	float height, width;
 	
-	public Ships(String n, int x, int y, int sz )
+	public Ships(int n, int x, int y, int sz )
 	{
-		name = new String(n);
+		name = n;
 		hull = new Rect();
 		ix = x;
 		iy =y;
@@ -85,7 +85,15 @@ public class Ships
     	    	  break;
     	 }    		
 	}
+	public Direction getDirection()
+	{
+		return this.direction;
+	}
 	
+	public int getName() {
+		return name;
+	}
+
 	public void animate(Direction d)
 	{
 		

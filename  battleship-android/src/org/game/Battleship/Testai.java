@@ -2,7 +2,7 @@ package org.game.Battleship;
 
 import android.graphics.Point;
 
-public class Testai extends Aiplayer {
+public class Testai extends AbstractAI {
 
 	@Override
 	public int[][] aiGrid() 

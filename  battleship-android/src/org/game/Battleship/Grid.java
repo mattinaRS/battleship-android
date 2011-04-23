@@ -29,25 +29,96 @@ public class Grid extends View
 	private float height; // height of one tile
 	private int selX; // X index of selection
 	private int selY; // Y index of selection
+	private int[][] pgrid;
 	private final Rect selRect = new Rect();
 	private final List<Point> HiCoord = new ArrayList<Point>(1);	
 	private final List<Ships> ships = new ArrayList<Ships>(numships);	
 	private final List<Rect> HiList = new ArrayList<Rect>(1);
+	private final List<Rect> HitMiss = new ArrayList<Rect>(100);
+	private final int[] target = new int[100];
+	int turns;
 	private int currSelect;
     public Grid(Context context) {
     	super(context);
+    	turns = 0;
     	this.gameboard = (GameBoard) context;
     	HiList.add(new Rect());
     	HiCoord.add(new Point(-1,-1));
-    	ships.add(new Ships("Carrier", 0, 0+10, 5));
-    	ships.add(new Ships("GunBoat", 1, 6+10, 2));
-    	ships.add(new Ships("Destroyer", 5, 1+10, 3));
-    	ships.add(new Ships("Submarine",4, 4+10, 3));
-    	ships.add(new Ships("Battleship", 7, 2+10, 4));
+    	ships.add(new Ships(1, 0, 0+10, 5));
+    	ships.add(new Ships(2, 1, 6+10, 2));
+    	ships.add(new Ships(3, 5, 1+10, 3));
+    	ships.add(new Ships(4,4, 4+10, 3));
+    	ships.add(new Ships(5, 7, 2+10, 4));
     	deploy_phase = true;
     	currSelect = 0;
     	setFocusable(true);
     	setFocusableInTouchMode(true);
+    }
+    
+    public int[][] getPgrid()
+    {
+    	
+    	pgrid = new int[10][10];
+    	int x,y,size;
+    	int ordx, ordy;
+    	Direction d;
+    	for(int i =0; i< numships; i++)
+    	{
+    		x = ships.get(i).getX();
+    		y = ships.get(i).getY();
+    		ordy = y - 10;
+    		ordx = x;
+    		Log.d("ORDY", Integer.toString(ordy));
+    		Log.d("ORDX", Integer.toString(ordx));
+    		size = ships.get(i).getSize();
+    		d = ships.get(i).getDirection();
+   			switch(d)
+   			{
+   			case NORTH:
+   	    		for(int j =0; j<size; j++)
+   	    		{
+   	    			Log.d("NORTH", Integer.toString(size));
+   	    			pgrid[ordx][ordy] = ships.get(i).getName();
+   	    			ordy++;
+   	    		}
+   				break;
+   			case EAST:
+   	    		for(int j =0; j<size; j++)
+   	    		{
+   	    			Log.d("EAST", Integer.toString(size));
+   	    			pgrid[ordx][ordy] = ships.get(i).getName();
+   	    			ordx++;
+   	    		}
+   				break;
+   			}
+    	}
+    	return (pgrid);
+    }
+    
+    public void updateUIonattk(Point p)
+    {
+    	Log.d("UI", "UpdatUi called");
+    	int x, y;
+    	x = p.x;
+    	y = p.y + 10;
+    	Log.d("y", Integer.toString(y));
+		Rect r  = new Rect();
+    	if(pgrid[p.x][p.y] == 0)
+    	{
+        	Log.d("UI", "MISS");
+    		getRect(x,y, r);
+    		HitMiss.add(r);
+    		target[HitMiss.size()] = 0;
+    		invalidate(r);
+    	}
+    	else
+    	{
+        	Log.d("UI", "HIT");
+    		getRect(x,y, r);
+    		HitMiss.add(r);    		
+    		target[HitMiss.size()] = 1;
+    		invalidate(r);
+    	}
     }
     
     public Point updateaigrid(int[][] aigrid)
@@ -95,6 +166,10 @@ public class Grid extends View
 	    canvas.drawRect(0, 0, getWidth(), getHeight(), background);
 	    // Draw the board...
 	    // Draw the numbers...
+	    Paint hit = new Paint();
+	    Paint miss = new Paint();
+	    hit.setColor(getResources().getColor(R.color.battleship_hit));
+	    miss.setColor(getResources().getColor(R.color.battleship_miss));
 	    Paint dark = new Paint();
 	    Paint ShipBorder = new Paint();
 	    Paint ShipColor =new Paint();
@@ -145,6 +220,23 @@ public class Grid extends View
 			selected.setColor(getResources().getColor(
 			R.color.battleship_selected));
 			canvas.drawRect(selRect, selected);
+			Rect r = new Rect();
+			Log.d("Hit", Integer.toString(HitMiss.size()));
+			for(int i=0; i<HitMiss.size(); i++)
+			{
+				r = HitMiss.get(i);
+				Log.d(TAG, r.toString());
+				if(target[i] ==0)
+				{
+					canvas.drawRect(r, miss);
+				}
+				else
+				{
+					canvas.drawRect(r, hit);
+				}
+					
+			}
+			
 		}
     }
     
