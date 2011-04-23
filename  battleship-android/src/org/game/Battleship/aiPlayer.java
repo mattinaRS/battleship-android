@@ -8,6 +8,17 @@ import android.util.Log;
 public class aiPlayer extends AbstractAI{
 	private int[][] mhsf = new int[10][10]; //aiGrid
 	
+	public aiPlayer()
+	{
+		for(int i=0; i<10; i++)
+		{
+			for(int j=0; j<10; j++)
+			{
+				mhsf[i][j] = 3;
+			}
+		}
+	}
+	
 	//Player grid with ships laid down....maybe provided to us after
 	//player has laid the ships.  Filled with true or false at every
 	//location a ship square exists.  So comp can compare against
