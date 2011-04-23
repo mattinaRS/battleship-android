@@ -63,6 +63,7 @@ public class Grid extends View
 
 	public void setAigrid(int[][] aigrid) {
 		this.aigrid = aigrid;
+		Log.d("ingridaigrid", gridtoString(aigrid, 10, 10));
 	}
 
 	public int[][] getPgrid()
@@ -387,4 +388,20 @@ public class Grid extends View
 		// TODO Auto-generated method stub
 		
 	}
+	
+	private String gridtoString(int[][] arr, int r, int c)
+	{
+		String str = new String();
+		for(int i=0; i<r; i++)
+		{
+			for(int j =0; j<c; j++)
+			{
+				str += Integer.toString(arr[i][j]);
+				str += " ";
+			}
+			str += "\n";				
+		}
+		return str;
+	}
+
 }

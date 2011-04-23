@@ -66,6 +66,14 @@ public class GameBoard extends Activity implements OnClickListener
 			plCell = grid.updateaigrid(aigrid);
 			updateAigrid(plCell);
 			aiCell = ai.aiAttack();
+			if(playergrid[aiCell.x][aiCell.y] ==0)
+			{
+				ai.isHit(false);				
+			}
+			else
+			{
+				ai.isHit(true);
+			}
 			grid.updateUIonattk(aiCell);			
 			updatePlayergrid(aiCell);
 			grid.invalidate();
