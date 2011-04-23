@@ -243,13 +243,18 @@ public class aiPlayer extends AbstractAI{
 
 	public Point aiAttack()
 {
+	Random rand = new Random();
+	Point p = new Point(); 
+	p.x = rand.nextInt(10);
+	p.y = rand.nextInt(10);
+	return p;
 	//Guess a target that has not been guessed
 	//Start of game or miss on previous turn
-	if (lastShot == 0)                      		
+/*	if (lastShot == 0)                      		
 	{
 		/* Checks to see state of grid with hits and misses 
 		and returns x,y coordinate to attack a location (random)
-		*/
+		
 		return attackGrid();
 		//return randomLocation on grid
 	}
@@ -258,6 +263,7 @@ public class aiPlayer extends AbstractAI{
 	   isSurrounded(this.lastShotCoordX, this.lastShotCoordY);
 	   return null;
    }
+*/
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

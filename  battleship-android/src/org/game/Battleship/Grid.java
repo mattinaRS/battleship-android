@@ -123,24 +123,24 @@ public class Grid extends View
     	}
     	else
     	{
-    		getRect(x,y, sel);
-    		HitMiss.add(sel);    		
-    		target[HitMiss.size()] = 1;
-    		invalidate(sel);
-    	}
-    	if(aigrid[selX][selY] == 0)
-    	{
-    		getRect(selX,selY, r);
-    		HitMissAI.add(r);
-    		targetAI[HitMissAI.size()] = 0;
-    		invalidate(r);
-    	}
-    	else
-    	{
     		getRect(x,y, r);
     		HitMiss.add(r);    		
     		target[HitMiss.size()] = 1;
     		invalidate(r);
+    	}
+    	if(aigrid[selX][selY] == 0)
+    	{
+    		getRect(selX,selY, sel);
+    		HitMissAI.add(sel);
+    		targetAI[HitMissAI.size()] = 0;
+    		invalidate(sel);
+    	}
+    	else
+    	{
+    		getRect(x,y, sel);
+    		HitMiss.add(sel);    		
+    		target[HitMiss.size()] = 1;
+    		invalidate(sel);
     	}
     }
     
