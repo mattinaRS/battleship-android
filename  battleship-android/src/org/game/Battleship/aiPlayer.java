@@ -214,8 +214,9 @@ public class aiPlayer extends AbstractAI{
 		}
 		else
 		{
-			attackGrid();
-			return null;
+			Point p;
+			p = attackGrid();			
+			return p;
 		}
 	}
 
@@ -242,29 +243,34 @@ public class aiPlayer extends AbstractAI{
 }
 
 	public Point aiAttack()
-{
-	Random rand = new Random();
-	Point p = new Point(); 
-	p.x = rand.nextInt(10);
-	p.y = rand.nextInt(10);
-	return p;
-	//Guess a target that has not been guessed
-	//Start of game or miss on previous turn
-/*	if (lastShot == 0)                      		
 	{
-		/* Checks to see state of grid with hits and misses 
-		and returns x,y coordinate to attack a location (random)
-		
-		return attackGrid();
-		//return randomLocation on grid
+		/*
+		Random rand = new Random();
+		Point p = new Point(); 
+		p.x = rand.nextInt(10);
+		p.y = rand.nextInt(10);
+		return p;
+		*/
+		//Guess a target that has not been guessed
+		//Start of game or miss on previous turn
+		if (lastShot == 0)                      		
+		{
+			/* Checks to see state of grid with hits and misses 
+			and returns x,y coordinate to attack a location (random)*/
+			Point coordinate;
+			coordinate = attackGrid();
+			return coordinate;
+			//return randomLocation on grid
+		}
+	   else                            					//if lastShot == 1  hit on previous turn with no sunk
+	   {
+		   
+			Point p;
+			p = isSurrounded(this.lastShotCoordX, this.lastShotCoordY);			
+			return p;
+	   }
+	
 	}
-   else                            					//if lastShot == 1  hit on previous turn with no sunk
-   {
-	   isSurrounded(this.lastShotCoordX, this.lastShotCoordY);
-	   return null;
-   }
-*/
-}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	//Get info about location
