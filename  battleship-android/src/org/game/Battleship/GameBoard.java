@@ -1,5 +1,7 @@
 package org.game.Battleship;
  
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
@@ -38,7 +40,7 @@ public class GameBoard extends Activity implements OnClickListener
         plCell = new Point();
         ai = new aiPlayer();
         Log.d(TAG, "before grid creation");
-//        aigrid = ai.aiGrid();
+        aigrid = ai.aiGrid();
         Log.d(TAG, "after grid creation");
         frame.addView(grid);        
         grid.requestFocus();        
@@ -53,8 +55,8 @@ public class GameBoard extends Activity implements OnClickListener
 			playergrid = grid.getPlayerGrid();
 	        buttonEnd.setEnabled(true);
 	        playergrid = grid.getPgrid();
-//	        grid.setAigrid(aigrid);
-//	        Log.d(TAG, playergrid.toString());
+	        grid.setAigrid(aigrid);	        
+	        Log.d("aigrid", gridtoString(aigrid, 10, 10));
 			grid.setDeploy_phase(false);
 			grid.invalidate();
 	        grid.requestFocus();        
@@ -95,5 +97,19 @@ public class GameBoard extends Activity implements OnClickListener
 		}		
 	}
 
+	private String gridtoString(int[][] arr, int r, int c)
+	{
+		String str = new String();
+		for(int i=0; i<r; i++)
+		{
+			for(int j =0; j<c; j++)
+			{
+				str += Integer.toString(arr[i][j]);
+				str += " ";
+			}
+			str += "\n";				
+		}
+		return str;
+	}
 	
 }
