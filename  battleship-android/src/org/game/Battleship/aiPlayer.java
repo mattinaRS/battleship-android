@@ -40,24 +40,24 @@ public class aiPlayer extends AbstractAI{
 	
 	//10x10 grid to place ships, free space (0), occupied(1)
 	private int[][] shipMap = new int [10][10];
-	private int[] shipFive_x = {2, 6, 2, 2, 2};
-	private int[] shipFive_y = {1, 1, 1, 2, 3};
+	private int[] shipFive_x = {1, 5, 1, 1, 1};
+	private int[] shipFive_y = {0, 0, 0, 1, 2};
 	private int[] shipFive_dir = {0, 0, 1, 1, 1};
 
-	private int[] shipFour_x = {8, 9, 10, 6, 7};
-	private int[] shipFour_y = {3, 2, 4, 6, 7};
+	private int[] shipFour_x = {7, 8, 9, 5, 6};
+	private int[] shipFour_y = {2, 1, 3, 5, 6};
 	private int[] shipFour_dir = {1, 1, 1, 0, 0};
 
-	private int[] shipThree_x = {1, 10, 6, 4, 7};
-	private int[] shipThree_y = {8, 8, 8, 10, 8};
+	private int[] shipThree_x = {0, 9, 5, 3, 6};
+	private int[] shipThree_y = {7, 7, 7, 9, 7};
 	private int[] shipThree_dir = {1, 1, 1, 0, 0};
 
-	private int[] shipThreeTwo_x = {3, 7, 5, 4, 4};
-	private int[] shipThreeTwo_y = {7, 8, 5, 4, 8};
+	private int[] shipThreeTwo_x = {2, 6, 4, 3, 3};
+	private int[] shipThreeTwo_y = {6, 7, 4, 3, 7};
 	private int[] shipThreeTwo_dir = {0, 0, 0, 1, 1};
 
-	private int[] shipTwo_x = {3, 5, 5, 7, 10};
-	private int[] shipTwo_y = {2, 2, 3, 2, 2};
+	private int[] shipTwo_x = {2, 4, 4, 6, 9};
+	private int[] shipTwo_y = {1, 1, 2, 1, 1};
 	private int[] shipTwo_dir = {0, 0, 1, 1, 1};
 		
 	//Getting if comp hit is true or false
@@ -292,26 +292,30 @@ public class aiPlayer extends AbstractAI{
 
 	public int[][] aiGrid()
 	{
-		Log.d("AIgrid", "in aigrid");
+		Log.d("AIgrid", "before initialize");
 		initializeShips();
 		Random rand = new Random();
 		int randXYDir = rand.nextInt(5);
 		
 		int[] shipLength = {5, 4, 3, 1, 2};
 		//boolean[] shipDirectory = {shipFive_dir[randXYDir], shipFour_dir[randXYDir], shipThree_dir[randXYDir], shipThreeTwo_dir[randXYDir], shipTwo_dir[randXYDir]};
-		
+		Log.d("AIgrid", "before for loop");
 		for(int i=0; i<5; i++)
 		{
 			int x = shipLength[i];
-			
+			Log.d("AIgrid Length", Integer.toString(x));
 			switch(x) 
 			{
 				case 5:
 					if(shipFive_dir[randXYDir] == 0)
 					{
+						Log.d("AIgrid randXYDir", Integer.toString(randXYDir));
+						Log.d("AIgrid direction", Integer.toString(shipFive_dir[randXYDir]));
 						for (int j=0; j<shipLength[i]; j++)
 						{
+							Log.d("AIgrid", "before shipMap placed");
 							shipMap[shipFive_x[randXYDir]++][shipFive_y[randXYDir]] = 5;
+							Log.d("AIgrid", "after shipMap Placed");
 						}
 					}
 					else
@@ -326,6 +330,8 @@ public class aiPlayer extends AbstractAI{
 				case 4:
 					if(shipFour_dir[randXYDir] == 0)
 					{
+						Log.d("AIgrid randXYDir four hor", Integer.toString(randXYDir));
+						Log.d("AIgrid direction four hor", Integer.toString(shipFive_dir[randXYDir]));
 						for (int j=0; j<shipLength[i]; j++)
 						{
 							shipMap[shipFour_x[randXYDir]++][shipFour_y[randXYDir]] = 4;
@@ -333,6 +339,8 @@ public class aiPlayer extends AbstractAI{
 					}
 					else
 					{
+						Log.d("AIgrid randXYDir four ver", Integer.toString(randXYDir));
+						Log.d("AIgrid direction four ver", Integer.toString(shipFive_dir[randXYDir]));
 						for (int j=0; j<shipLength[i]; j++)
 						{
 							shipMap[shipFour_x[randXYDir]][shipFour_y[randXYDir]++] = 4;
@@ -391,6 +399,7 @@ public class aiPlayer extends AbstractAI{
 					}
 					break;
 			}
+			Log.d("AIgrid index", Integer.toString(i));
 		}
 		Log.d("AIgrid", "before return");		
 		return shipMap;
