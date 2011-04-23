@@ -39,12 +39,9 @@ public class GameBoard extends Activity implements OnClickListener
         aiCell = new Point(4,4);
         plCell = new Point();
         ai = new aiPlayer();
-        Log.d(TAG, "before grid creation");
         aigrid = ai.aiGrid();
-        Log.d(TAG, "after grid creation");
         frame.addView(grid);        
         grid.requestFocus();        
-        Log.d(TAG, "gameboard launched");
     }
     
 	public void onClick(View src) {
