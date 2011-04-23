@@ -4,7 +4,7 @@ import java.util.Random;
 
 import android.graphics.Point;
 
-public class aiPlayer {
+public class aiPlayer extends AbstractAI{
 	private int[][] mhsf = new int[10][10]; //aiGrid
 	
 	//Player grid with ships laid down....maybe provided to us after
