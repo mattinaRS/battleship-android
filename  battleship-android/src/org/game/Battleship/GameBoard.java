@@ -36,8 +36,10 @@ public class GameBoard extends Activity implements OnClickListener
         playergrid = new int[10][10];
         aiCell = new Point(4,4);
         plCell = new Point();
-        ai = new Testai();
+        ai = new aiPlayer();
+        Log.d(TAG, "before grid creation");
         aigrid = ai.aiGrid();
+        Log.d(TAG, "after grid creation");
         frame.addView(grid);        
         grid.requestFocus();        
         Log.d(TAG, "gameboard launched");
@@ -51,6 +53,7 @@ public class GameBoard extends Activity implements OnClickListener
 			playergrid = grid.getPlayerGrid();
 	        buttonEnd.setEnabled(true);
 	        playergrid = grid.getPgrid();
+	        grid.setAigrid(aigrid);
 	        Log.d(TAG, playergrid.toString());
 			grid.setDeploy_phase(false);
 			grid.invalidate();
@@ -60,7 +63,7 @@ public class GameBoard extends Activity implements OnClickListener
 	        Log.d(TAG, "Turn ends");
 			plCell = grid.updateaigrid(aigrid);
 			updateAigrid(plCell);
-			//aiCell = ai.attackCell();
+			aiCell = ai.aiAttack();
 			grid.updateUIonattk(aiCell);			
 	        Log.d(TAG, "Update UI called");
 			updatePlayergrid(aiCell);

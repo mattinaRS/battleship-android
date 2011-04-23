@@ -57,7 +57,15 @@ public class Grid extends View
     	setFocusableInTouchMode(true);
     }
     
-    public int[][] getPgrid()
+    public int[][] getAigrid() {
+		return aigrid;
+	}
+
+	public void setAigrid(int[][] aigrid) {
+		this.aigrid = aigrid;
+	}
+
+	public int[][] getPgrid()
     {
     	
     	pgrid = new int[10][10];

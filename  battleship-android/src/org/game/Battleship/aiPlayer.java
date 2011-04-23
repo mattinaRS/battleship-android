@@ -3,6 +3,7 @@ package org.game.Battleship;
 import java.util.Random;
 
 import android.graphics.Point;
+import android.util.Log;
 
 public class aiPlayer extends AbstractAI{
 	private int[][] mhsf = new int[10][10]; //aiGrid
@@ -283,13 +284,14 @@ public class aiPlayer extends AbstractAI{
 		}
 	}
 
-	public int[][] placeShip()
+	public int[][] aiGrid()
 	{
+		Log.d("AIgrid", "in aigrid");
 		initializeShips();
 		Random rand = new Random();
 		int randXYDir = rand.nextInt(5);
 		
-		int[] shipLength = {5, 4, 3, 32, 2};
+		int[] shipLength = {5, 4, 3, 1, 2};
 		//boolean[] shipDirectory = {shipFive_dir[randXYDir], shipFour_dir[randXYDir], shipThree_dir[randXYDir], shipThreeTwo_dir[randXYDir], shipTwo_dir[randXYDir]};
 		
 		for(int i=0; i<5; i++)
@@ -349,17 +351,17 @@ public class aiPlayer extends AbstractAI{
 					}
 					break;
 					
-				case 32:
+				case 1:
 					if(shipThreeTwo_dir[randXYDir] == 0)
 					{
-						for (int j=0; j<shipLength[i]; j++)
+						for (int j=0; j<(shipLength[i]+2); j++)
 						{
 							shipMap[shipThreeTwo_x[randXYDir]++][shipThreeTwo_y[randXYDir]] = 32;
 						}
 					}
 					else
 					{
-						for (int j=0; j<shipLength[i]; j++)
+						for (int j=0; j<(shipLength[i]+2); j++)
 						{
 							shipMap[shipThreeTwo_x[randXYDir]][shipThreeTwo_y[randXYDir]++] = 32;
 						}
@@ -384,6 +386,7 @@ public class aiPlayer extends AbstractAI{
 					break;
 			}
 		}
+		Log.d("AIgrid", "before return");		
 		return shipMap;
 	}	
 

@@ -12,7 +12,7 @@ public class Testai extends AbstractAI {
 	}
 
 	@Override
-	public Point attackCell() 
+	public Point aiAttack() 
 	{
 		// TODO Auto-generated method stub
 		return null;
@@ -20,13 +20,6 @@ public class Testai extends AbstractAI {
 
 	@Override
 	public void isHit(boolean hit) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setPlayerGrid(int[][] g) 
 	{
 		// TODO Auto-generated method stub
 		
