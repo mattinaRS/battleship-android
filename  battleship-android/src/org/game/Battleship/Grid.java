@@ -30,6 +30,7 @@ public class Grid extends View
 	private int selX; // X index of selection
 	private int selY; // Y index of selection
 	private int[][] pgrid, aigrid;
+	Point pattack = new Point();
 	private final Rect selRect = new Rect();
 	private final List<Point> HiCoord = new ArrayList<Point>(1);	
 	private final List<Ships> ships = new ArrayList<Ships>(numships);	
@@ -61,9 +62,8 @@ public class Grid extends View
 		return aigrid;
 	}
 
-	public void setAigrid(int[][] aigrid) {
-		this.aigrid = aigrid;
-		Log.d("ingridaigrid", gridtoString(aigrid, 10, 10));
+	public void setAigrid(int[][] grid) {
+		this.aigrid = grid;
 	}
 
 	public int[][] getPgrid()
@@ -79,8 +79,6 @@ public class Grid extends View
     		y = ships.get(i).getY();
     		ordy = y - 10;
     		ordx = x;
-//   		Log.d("ORDY", Integer.toString(ordy));
-//   		Log.d("ORDX", Integer.toString(ordx));
     		size = ships.get(i).getSize();
     		d = ships.get(i).getDirection();
    			switch(d)
@@ -125,8 +123,11 @@ public class Grid extends View
     		target.add(1);
     		invalidate(r);
     	}
-    	
-    	if(aigrid[selX][selY] == 0)
+//    	Log.d("Y", Integer.toString(pattack.y));
+//    	Log.d("X", Integer.toString(pattack.x));
+//    	Log.d("aigrid", Integer.toString(aigrid[pattack.x][pattack.y]));
+//    	Log.d("aigrid", gridtoString(aigrid, 10, 10));
+    	if(aigrid[pattack.x][pattack.y] == 0)
     	{
     		Point point = new Point(HiCoord.get(0));
         	HiList.get(0).setEmpty();
@@ -138,17 +139,21 @@ public class Grid extends View
     	}
     	else
     	{
-    		getRect(x,y, sel);
-    		HitMiss.add(sel);    		
-    		target.add(1);
+//    		Log.d("aigrid", "found ship");
+    		Point point = new Point(HiCoord.get(0));
+        	HiList.get(0).setEmpty();
+       		HiCoord.get(0).set(-1, -1);
+    		getRect(point.x,point.y, sel);
+    		HitMissAI.add(sel);    		
+    		targetAI.add(1);
     		invalidate(sel);
+ //   		Log.d("aigrid", "found ship ends");
     	}
     }
     
     public Point updateaigrid(int[][] aigrid)
     {
-    	Point p = new Point();
-    	p = HiCoord.get(0);
+    	Point p = new Point(pattack);
    		return p;
     }
     
@@ -217,7 +222,6 @@ public class Grid extends View
 
 	    canvas.drawLine(0, numrows * height, getWidth(), numrows * height, dark);
 		canvas.drawLine(0, numrows * height + 1, getWidth(), numrows * height + 1, hilite);
-//		canvas.drawRect(HiList.get(0), dark);
 		for(int i =0; i<numships;i++)
 		{
 			Rect r = ships.get(i).getHull();
@@ -233,6 +237,7 @@ public class Grid extends View
 		}
 		if(deploy_phase == false)
 		{
+//			Log.d("aigrid", "in draw");
 			canvas.drawRect(HiList.get(0), dark);
 			Paint selected = new Paint();
 			selected.setColor(getResources().getColor(
@@ -253,8 +258,10 @@ public class Grid extends View
 				}					
 			}
 
+//			Log.d("aigrid", "updating ai ui");
 			for(int i=0; i<HitMissAI.size(); i++)
 			{
+//				Log.d("aigrid", "updating ai ui");
 				sel = HitMissAI.get(i);
 				if(targetAI.get(i)==0)
 				{
@@ -262,6 +269,7 @@ public class Grid extends View
 				}
 				else
 				{
+//					Log.d("aigrid", "updating hit");
 					canvas.drawRect(sel, hit);
 				}
 					
@@ -273,8 +281,6 @@ public class Grid extends View
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) 
     {
-//	    Log.d(TAG, "onKeyDown: keycode=" + keyCode + ", event="
-//	    + event);
 	    if(deploy_phase == false)
 	    {
 		    switch (keyCode) 
@@ -339,6 +345,8 @@ public class Grid extends View
     	invalidate(selRect);
     	selX = Math.min(Math.max(x, 0), 2*numrows);
     	selY = Math.min(Math.max(y, 0), numcols);
+//    	Log.d("Selx",Integer.toString(selX));
+//    	Log.d("Sely",Integer.toString(selY));    	
     	getRect(selX, selY, selRect);
     	invalidate(selRect);
     }
@@ -373,21 +381,16 @@ public class Grid extends View
     		HiCoord.set(0, new Point(selX,selY));
     	   	getRect(selX, selY, HiList.get(0));
     	   	invalidate(HiList.get(0));
+        	pattack.x = selY;
+        	pattack.y = selX;
     		return;    			
     	}
     }
-
-	public int[][] getPlayerGrid() 
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void updateplayergrid(Point p) 
-	{
-		// TODO Auto-generated method stub
-		
-	}
+    
+    public Point getpAttk()
+    {
+    	return new Point(pattack);
+    }
 	
 	private String gridtoString(int[][] arr, int r, int c)
 	{

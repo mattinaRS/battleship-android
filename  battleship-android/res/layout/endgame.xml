@@ -19,7 +19,7 @@
              android:textStyle="bold" 
              android:textSize = "80sp" />
      </TableRow>
-     <TableRow android:layout_height="fill_parent" android:layout_weight="0.35">
+     <TableRow android:layout_height="fill_parent" android:layout_weight="0.20">
          <TextView
              android:id="@+id/sc"
              android:text=""
@@ -29,4 +29,13 @@
              android:layout_width="fill_parent" android:layout_weight="1"
              />
      </TableRow>
+     <TableRow android:layout_height="fill_parent" android:layout_weight="0.15">
+		<Button 
+				android:layout_gravity="fill_horizontal" 
+				android:layout_width="fill_parent" 
+				android:text="MainMenu" 
+				android:layout_height="match_parent" 
+				android:id="@+id/mainmenu">
+		</Button>     
+</TableRow>
 </TableLayout>

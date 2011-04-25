@@ -1,15 +1,21 @@
 package org.game.Battleship;
 
+import java.util.Timer;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Endgame extends Activity 
+public class Endgame extends Activity implements OnClickListener
 {	
 	int sc;
 	static final String tag = new String("Endgame");
@@ -17,6 +23,7 @@ public class Endgame extends Activity
 	int playerScore;
 	String res = new String();
 	TextView textEnd, textScore;
+	Button menu;
 	ComputeScore cs;
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -29,6 +36,9 @@ public class Endgame extends Activity
         setContentView(R.layout.endgame);
         textEnd = (TextView)findViewById(R.id.res);
         textScore = (TextView)findViewById(R.id.sc);
+        menu = (Button)findViewById(R.id.mainmenu);
+        menu.setOnClickListener(this);
+
         textEnd.setText(res);
         sc = cs.compute(10, 3, 5);
         textScore.setText("Your Score = " + Integer.toString(sc));     
@@ -125,6 +135,18 @@ public class Endgame extends Activity
 				alert.show();
 				//////////////////
 			}
+		}
+	}
+
+	@Override
+	public void onClick(View src) 
+	{
+		switch(src.getId())
+		{
+		case R.id.mainmenu:
+			Intent myIntent = new Intent(Endgame.this, Battleship.class);
+			Endgame.this.startActivity(myIntent);
+			break;		
 		}
 	}
 }
