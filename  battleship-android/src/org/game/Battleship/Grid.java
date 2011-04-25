@@ -346,8 +346,8 @@ public class Grid extends View
     private void select(int x, int y) 
     {
     	invalidate(selRect);
-    	selX = Math.min(Math.max(x, 0), 2*numrows);
-    	selY = Math.min(Math.max(y, 0), numcols);
+    	selX = Math.min(Math.max(x, 0), numrows -1);
+    	selY = Math.min(Math.max(y, 0), numcols - 1);
 //    	Log.d("Selx",Integer.toString(selX));
 //    	Log.d("Sely",Integer.toString(selY));    	
     	getRect(selX, selY, selRect);
