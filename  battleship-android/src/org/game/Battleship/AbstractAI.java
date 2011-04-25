@@ -7,5 +7,4 @@ public abstract class AbstractAI
 	public abstract int[][] aiGrid();
 	public abstract Point aiAttack();
 	public abstract void isHit(boolean hit);
-//	public abstract void setPlayerGrid(int[][] g);
 }
