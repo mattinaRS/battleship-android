@@ -3,6 +3,8 @@ package org.game.Battleship;
 import java.util.Arrays;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.view.View.OnClickListener;
@@ -15,6 +17,7 @@ import android.widget.FrameLayout;
 public class GameBoard extends Activity implements OnClickListener
 {
 	private static final String TAG = new String("GameBoard");
+	AlertDialog.Builder alert;	
 	Button buttonEnd, buttonDeploy;
 	Grid grid;
 	FrameLayout frame; 
@@ -31,6 +34,7 @@ public class GameBoard extends Activity implements OnClickListener
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameboard);
+    	alert = new AlertDialog.Builder(this);	
         turns = 0;
         numshipsai = numshipspl = 5;
         buttonEnd = (Button)findViewById(R.id.Turn);
@@ -107,18 +111,63 @@ public class GameBoard extends Activity implements OnClickListener
 		{
 			case 1:
 				pc--;
+				if(pc == 0)
+				{
+					alert.setTitle("YOUR CARRIER WAS DESTROYED!");
+					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+						}
+					});
+					alert.show();
+				}
 				break;
 			case 2:
 				pg--;
+				if(pg == 0)
+				{
+					alert.setTitle("YOUR GUNBOAT WAS DESTROYED!");
+					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+						}
+					});
+					alert.show();
+				}
 				break;
 			case 3:
 				ps--;
+				if(ps == 0)
+				{
+					alert.setTitle("YOUR SUBMARINE WAS DESTROYED!");
+					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+						}
+					});
+					alert.show();
+				}
 				break;
 			case 4:
 				pd--;
+				if(pd == 0)
+				{
+					alert.setTitle("YOUR DESTROYER WAS DESTROYED!");
+					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+						}
+					});
+					alert.show();
+				}
 				break;
 			case 5:
 				pb--;
+				if(pb == 0)
+				{
+					alert.setTitle("YOUR BATTLESHIP WAS DESTROYED!");
+					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+						}
+					});
+					alert.show();
+				}
 				break;
 		}
 //		Log.d("sub", Integer.toString(ps));
@@ -150,20 +199,66 @@ public class GameBoard extends Activity implements OnClickListener
 		{
 			case 2:
 				aig--;
+				if(aig == 0)
+				{
+					alert.setTitle("YOU DESTROYED A GUNBOAT !");
+					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+						}
+					});
+					alert.show();					
+				}
 				break;
 			case 3:
 				aid--;
+				if(aid == 0)
+				{
+					alert.setTitle("YOU DESTROYED A DESTROYER!");
+					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+						}
+					});
+					alert.show();
+				}
 				break;
 			case 6:
 				ais--;
+				if(ais == 0)
+				{
+					alert.setTitle("YOU DESTROYED A SUBMARINE!");
+					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+						}
+					});
+					alert.show();
+				}
 				break;
 			case 4:
 				aib--;
+				if(aib == 0)
+				{
+					alert.setTitle("YOU DESTROYED A BATTLESHIP!");
+					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+						}
+					});
+					alert.show();
+				}
 				break;
 			case 5:
 				aic--;
+				if(aic == 0)
+				{
+					alert.setTitle("YOU DESTROYED A CARRIER!");
+					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int whichButton) {
+						}
+					});
+					alert.show();
+				}
 				break;
-		}
+			}
+		
 //		Log.d("sub", Integer.toString(ais));
 //		Log.d("gb", Integer.toString(aig));
 //		Log.d("carr", Integer.toString(aic));
