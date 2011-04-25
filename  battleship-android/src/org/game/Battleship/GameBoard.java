@@ -188,7 +188,6 @@ public class GameBoard extends Activity implements OnClickListener
 		}
 		if(endgame == true)
 		{
-			grid.requestFocus();
 	        Log.d(TAG, "Game ends");
 			Intent endg = new Intent(GameBoard.this, Endgame.class);
 			endg.putExtra("Win", "You Win");

@@ -36,6 +36,8 @@ public class Grid extends View
 	private final Rect selRect = new Rect();
 	private final List<Point> HiCoord = new ArrayList<Point>(1);	
 	private final List<Ships> ships = new ArrayList<Ships>(numships);	
+	private final List<Ships> aidestroyed = new ArrayList<Ships>(numships);	
+	private final List<Ships> pldestroyed = new ArrayList<Ships>(numships);	
 	private final List<Rect> HiList = new ArrayList<Rect>(1);
 	private final List<Rect> HitMiss = new ArrayList<Rect>(100);
 	private final List<Integer> target = new ArrayList<Integer>(100);
