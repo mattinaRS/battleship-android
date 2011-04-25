@@ -53,12 +53,19 @@ public class GameBoard extends Activity implements OnClickListener
 //        grid.requestFocus();        
     }
     
+    
+    
+    public Button getButtonEnd() {
+		return buttonEnd;
+	}
+
+
 	public void onClick(View src) {
 		switch(src.getId())
 		{
 		case R.id.Deploy:
 	        Log.d(TAG, "Deployment ends");
-	        buttonEnd.setEnabled(true);
+	        buttonDeploy.setEnabled(false);
 	        playergrid = grid.getPgrid();
 	        grid.setAigrid(aigrid);	        
 	        Log.d("aigrid", gridtoString(aigrid, 10, 10));
@@ -66,8 +73,9 @@ public class GameBoard extends Activity implements OnClickListener
 			grid.invalidate();
 //	        grid.requestFocus();        
 	        break;
-		case R.id.Turn:			
+		case R.id.Turn:		
 	        Log.d(TAG, "Turn ends");
+	        buttonEnd.setEnabled(false);
 	        turns++;
 			plCell = grid.updateaigrid(aigrid);
 //			Log.d("Plgrid", gridtoString(playergrid, 10, 10));
@@ -125,6 +133,7 @@ public class GameBoard extends Activity implements OnClickListener
 	        Log.d(TAG, "Game ends");
 			Intent endg = new Intent(GameBoard.this, Endgame.class);
 			GameBoard.this.startActivity(endg);			
+			GameBoard.this.finish();
 		}
 	}
 

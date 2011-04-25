@@ -66,21 +66,25 @@ public class Ships
    	    switch (d) 
    	    {
     	      case NORTH:
-    	    	  iy--;
+    	    	  if(iy>10)
+    	    		  iy--;
     	    	  direction = Direction.NORTH;
     	    	  setRect(ix,iy);
     	          break;
     	      case SOUTH:
-    	    	  iy++;
+    	    	  if(iy + size< 20)
+    	    		  iy++;
     	    	  setRect(ix,iy);
     	        break;
     	      case EAST:
-    	    	  ix++;
+    	    	  if(ix + size < 10)
+    	    		  ix++;
     	    	  direction = Direction.EAST;
     	    	  setRect(ix,iy);
     	        break;
     	      case WEST:
-    	    	  ix--;
+    	    	  if(ix > 0)
+    	    		  ix--;
     	    	  setRect(ix,iy);
     	    	  break;
     	 }    		

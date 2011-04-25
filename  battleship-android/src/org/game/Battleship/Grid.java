@@ -12,6 +12,7 @@ import android.graphics.Paint.Style;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 
 public class Grid extends View 
 {
@@ -21,6 +22,7 @@ public class Grid extends View
   	}
 	private static final String TAG = "BattleShip" ;
 	private final GameBoard gameboard;
+	private Button end;
 	private final int numrows = 10;
 	private final int numcols = 10;
 	private final int numships = 5;
@@ -44,6 +46,7 @@ public class Grid extends View
     public Grid(Context context) {
     	super(context);
     	this.gameboard = (GameBoard) context;
+    	end = gameboard.getButtonEnd();
     	aigrid = new int[10][10];
     	HiList.add(new Rect());
     	HiCoord.add(new Point(-1,-1));
@@ -374,6 +377,7 @@ public class Grid extends View
    			HiCoord.set(0, new Point(-1, -1));
    	    	getRect(-1, -1, HiList.get(0));
    			invalidate(HiList.get(0));
+   			end.setEnabled(false);
    			return;
    		}
     	if(((HiCoord.get(0)).x == -1)) 
@@ -383,6 +387,7 @@ public class Grid extends View
     	   	invalidate(HiList.get(0));
         	pattack.x = selY;
         	pattack.y = selX;
+   			end.setEnabled(true);
     		return;    			
     	}
     }
