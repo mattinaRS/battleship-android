@@ -18,7 +18,7 @@ public class GameBoard extends Activity implements OnClickListener
 {
 	private static final String TAG = new String("GameBoard");
 	AlertDialog.Builder alert;	
-	Button buttonEnd, buttonDeploy;
+	Button buttonEnd, buttonDeploy, buttonMenu;
 	Grid grid;
 	FrameLayout frame; 
 	AbstractAI ai;
@@ -39,9 +39,11 @@ public class GameBoard extends Activity implements OnClickListener
         numshipsai = numshipspl = 5;
         buttonEnd = (Button)findViewById(R.id.Turn);
         buttonDeploy = (Button)findViewById(R.id.Deploy);
+        buttonMenu = (Button)findViewById(R.id.MM);
         buttonEnd.setOnClickListener(this);
         buttonEnd.setEnabled(false);
         buttonDeploy.setOnClickListener(this);
+        buttonMenu.setOnClickListener(this);
         frame =	(FrameLayout)findViewById(R.id.main_view1);
         aig =  pg =2;
         aic = pc = 5;
@@ -69,6 +71,11 @@ public class GameBoard extends Activity implements OnClickListener
 	public void onClick(View src) {
 		switch(src.getId())
 		{
+		case R.id.MM:
+			Intent myIntent = new Intent(GameBoard.this, Battleship.class);
+			GameBoard.this.startActivity(myIntent);
+			this.finish();
+			break;
 		case R.id.Deploy:
 	        Log.d(TAG, "Deployment ends");
 	        buttonDeploy.setEnabled(false);

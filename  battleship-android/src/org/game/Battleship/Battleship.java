@@ -39,6 +39,7 @@ public class Battleship extends Activity implements OnClickListener {
 		case R.id.play:
 			Intent myIntent = new Intent(Battleship.this, GameBoard.class);
 			Battleship.this.startActivity(myIntent);
+			this.finish();
 			break;
 		case R.id.hiscore:
 			Intent hiscore = new Intent(Battleship.this, HighScore.class);
