@@ -21,6 +21,7 @@ public class Endgame extends Activity implements OnClickListener
 	static final String tag = new String("Endgame");
 	DBAdapter db;
 	int playerScore;
+	int aiships, plships, turns;
 	String res = new String();
 	TextView textEnd, textScore;
 	Button menu;
@@ -28,19 +29,26 @@ public class Endgame extends Activity implements OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {    	
-    	Log.d("Endg", "create");
-    	db= new DBAdapter(this);
-    	res = "You Lose";
-    	cs = new ComputeScore();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.endgame);
+    	Bundle extras = getIntent().getExtras();
+    	if(extras != null)
+    	{
+    		res = extras.getString("Win");
+    		aiships = extras.getInt("aiships",0);
+    		plships = extras.getInt("plships",0);
+    		turns = extras.getInt("turns", 100);
+    	}
+    	Log.d("Endg", "create");
+    	db= new DBAdapter(this);
+    	cs = new ComputeScore();
         textEnd = (TextView)findViewById(R.id.res);
         textScore = (TextView)findViewById(R.id.sc);
         menu = (Button)findViewById(R.id.mainmenu);
         menu.setOnClickListener(this);
 
         textEnd.setText(res);
-        sc = cs.compute(10, 3, 5);
+        sc = cs.compute(turns, aiships, plships);
         textScore.setText("Your Score = " + Integer.toString(sc));     
         Log.d(tag, "sc called");
         saveScore(sc);

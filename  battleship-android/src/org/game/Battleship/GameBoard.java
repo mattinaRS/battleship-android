@@ -19,6 +19,7 @@ public class GameBoard extends Activity implements OnClickListener
 	Grid grid;
 	FrameLayout frame; 
 	AbstractAI ai;
+	int numshipsai, numshipspl;
 	int[][] aigrid, playergrid;
 	private Point aiCell, plCell;
 	boolean endgame = false;
@@ -31,6 +32,7 @@ public class GameBoard extends Activity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameboard);
         turns = 0;
+        numshipsai = numshipspl = 5;
         buttonEnd = (Button)findViewById(R.id.Turn);
         buttonDeploy = (Button)findViewById(R.id.Deploy);
         buttonEnd.setOnClickListener(this);
@@ -80,10 +82,8 @@ public class GameBoard extends Activity implements OnClickListener
 			plCell = grid.updateaigrid(aigrid);
 //			Log.d("Plgrid", gridtoString(playergrid, 10, 10));
 			updateAigrid(plCell);
-			Log.d("Pl point", plCell.toString());
 			aiCell = ai.aiAttack();
-			Log.d("ai x", Integer.toString(aiCell.x));
-			Log.d("ai y", Integer.toString(aiCell.y));
+//			Log.d("ai point", aiCell.toString());
 			updatePlayergrid(aiCell);
 			if(playergrid[aiCell.x][aiCell.y] ==0)
 			{
@@ -95,8 +95,6 @@ public class GameBoard extends Activity implements OnClickListener
 			}
 			
 			grid.updateUIonattk(aiCell);			
-	        Log.d(TAG, "Update UI called");
-			updatePlayergrid(aiCell);
 			grid.invalidate();
 //	        grid.requestFocus();        
 	        break;
@@ -107,22 +105,27 @@ public class GameBoard extends Activity implements OnClickListener
 	{
 		switch (playergrid[p.x][p.y])
 		{
+			case 1:
+				pc--;
+				break;
 			case 2:
 				pg--;
 				break;
 			case 3:
-				pd--;
-				break;
-			case 32:
 				ps--;
 				break;
 			case 4:
-				pb--;
+				pd--;
 				break;
 			case 5:
-				pc--;
+				pb--;
 				break;
 		}
+//		Log.d("sub", Integer.toString(ps));
+//		Log.d("gb", Integer.toString(pg));
+//		Log.d("carr", Integer.toString(pc));
+//		Log.d("des", Integer.toString(pd));
+//		Log.d("bs", Integer.toString(pb));
 		if(pg == 0 && pb == 0 && pd == 0 && ps == 0 && pc == 0)
 		{
 			endgame = true;
@@ -132,6 +135,10 @@ public class GameBoard extends Activity implements OnClickListener
 			grid.requestFocus();
 	        Log.d(TAG, "Game ends");
 			Intent endg = new Intent(GameBoard.this, Endgame.class);
+			endg.putExtra("Win", "You Win");
+			endg.putExtra("turns", turns);
+			endg.putExtra("aiships", numshipsai);
+			endg.putExtra("aiships", numshipspl);			
 			GameBoard.this.startActivity(endg);			
 			GameBoard.this.finish();
 		}
@@ -157,11 +164,11 @@ public class GameBoard extends Activity implements OnClickListener
 				aic--;
 				break;
 		}
-		Log.d("sub", Integer.toString(ais));
-		Log.d("gb", Integer.toString(aig));
-		Log.d("carr", Integer.toString(aic));
-		Log.d("des", Integer.toString(aid));
-		Log.d("bs", Integer.toString(aib));
+//		Log.d("sub", Integer.toString(ais));
+//		Log.d("gb", Integer.toString(aig));
+//		Log.d("carr", Integer.toString(aic));
+//		Log.d("des", Integer.toString(aid));
+//		Log.d("bs", Integer.toString(aib));
 		if(aig == 0 && aib == 0 && aid == 0 && ais == 0 && aic == 0)
 		{
 			endgame = true;
@@ -170,6 +177,10 @@ public class GameBoard extends Activity implements OnClickListener
 		{
 	        Log.d(TAG, "Game ends");
 			Intent endg = new Intent(GameBoard.this, Endgame.class);
+			endg.putExtra("Win", "You Lose");
+			endg.putExtra("turns", turns);
+			endg.putExtra("aiships", numshipsai);
+			endg.putExtra("aiships", numshipspl);			
 			GameBoard.this.startActivity(endg);			
 		}		
 	}
