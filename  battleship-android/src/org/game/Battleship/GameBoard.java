@@ -90,6 +90,8 @@ public class GameBoard extends Activity implements OnClickListener
 			        aigrid = ai.aiGrid();
 					break;				
 			}
+			rb1.setEnabled(false);
+			diff.setEnabled(false);
 			buttonDeploy.setEnabled(true);
 			break;
 		case R.id.MM:
@@ -124,10 +126,8 @@ public class GameBoard extends Activity implements OnClickListener
 	        buttonEnd.setEnabled(false);
 	        turns++;
 			plCell = grid.updateaigrid(aigrid);
-//			Log.d("Plgrid", gridtoString(playergrid, 10, 10));
 			updateAigrid(plCell);
 			aiCell = ai.aiAttack();
-//			Log.d("ai point", aiCell.toString());
 			updatePlayergrid(aiCell);
 			if(playergrid[aiCell.x][aiCell.y] ==0)
 			{

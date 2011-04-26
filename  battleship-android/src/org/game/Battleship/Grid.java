@@ -246,7 +246,8 @@ public class Grid extends View
 			canvas.drawRect(HiList.get(0), dark);
 			Paint selected = new Paint();
 			selected.setColor(getResources().getColor(
-			R.color.battleship_selected));
+			R.color.battleship_black));
+			selected.setStyle(style);
 			canvas.drawRect(selRect, selected);
 			Rect r = new Rect();
 			Rect sel = new Rect();
