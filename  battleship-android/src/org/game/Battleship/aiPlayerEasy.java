@@ -12,6 +12,7 @@ public class aiPlayerEasy extends AbstractAI {
 		{
 			for(int j=0; j<10; j++)
 			{
+				mhf[i][j] = 3;
 				shipMap[i][j] = 0;
 			}
 		}
