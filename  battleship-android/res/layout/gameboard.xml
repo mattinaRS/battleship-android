@@ -4,28 +4,44 @@
          	android:id = "@+id/RHE"
          	android:layout_width="fill_parent"
          	android:layout_height="fill_parent"
-         	android:layout_weight="0"
+         	android:layout_weight="1"
          	android:background="#FF00000F"
 			android:padding="5dp">
-	
      <TableRow android:layout_height="wrap_content">
-	    <Button android:text="End Turn" 
+  		<RadioGroup android:orientation = "horizontal" android:id = "@+id/RG">
+			<RadioButton
+				android:id = "@+id/RB1"
+				android:text = "Easy"
+				android:checked = "true"
+			/>
+			<RadioButton
+				android:id = "@+id/RB2"
+				android:text = "Hard"				
+			/>
+  		</RadioGroup>   
+  		<Button
+				android:id = "@+id/Diff"
+				android:text = "Select"/>				
+     </TableRow>
+	
+     <TableRow android:layout_height="wrap_content" android:gravity = "center">
+	    <Button android:text="Attack" 
 	         	android:id = "@+id/Turn"
+	         	android:enabled = "false"
 	    		android:layout_weight="0.4"
-   				android:layout_width="wrap_content" 
    				android:layout_height="wrap_content" >
    		</Button>
 	    <Button android:layout_height="wrap_content" 
          	android:id = "@+id/Deploy"
-	    		android:layout_width="wrap_content" 
+	         	android:enabled = "false"
 				android:layout_weight="0.4"
-	    		android:text="End Deployment">
+	    		android:text="Deploy">
 	    </Button>
 	    <Button android:layout_height="wrap_content" 
          	android:id = "@+id/MM"
 	    		android:layout_width="wrap_content" 
 				android:layout_weight="0.2"
-	    		android:text="Main Menu">
+	    		android:text="Menu">
 	    </Button>
      </TableRow>
 	<TableRow android:layout_height="fill_parent" android:layout_weight="1" android:background="#FFFFFFFF">

@@ -13,12 +13,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
  
 public class GameBoard extends Activity implements OnClickListener
 {
 	private static final String TAG = new String("GameBoard");
 	AlertDialog.Builder alert;	
-	Button buttonEnd, buttonDeploy, buttonMenu;
+	Button buttonEnd, buttonDeploy, buttonMenu, diff;
+	RadioGroup rg;
+	RadioButton rb1, rb2;
 	Grid grid;
 	FrameLayout frame; 
 	AbstractAI ai;
@@ -35,15 +39,20 @@ public class GameBoard extends Activity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameboard);
     	alert = new AlertDialog.Builder(this);	
-        turns = 0;
+    	turns = 0;
         numshipsai = numshipspl = 5;
         buttonEnd = (Button)findViewById(R.id.Turn);
         buttonDeploy = (Button)findViewById(R.id.Deploy);
         buttonMenu = (Button)findViewById(R.id.MM);
+        diff = (Button)findViewById(R.id.Diff);
+        rb1 = (RadioButton)findViewById(R.id.RB1);
+        rb2 = (RadioButton)findViewById(R.id.RB1);
+        rg = (RadioGroup)findViewById(R.id.RG);
         buttonEnd.setOnClickListener(this);
         buttonEnd.setEnabled(false);
         buttonDeploy.setOnClickListener(this);
         buttonMenu.setOnClickListener(this);
+        diff.setOnClickListener(this);
         frame =	(FrameLayout)findViewById(R.id.main_view1);
         aig =  pg =2;
         aic = pc = 5;
@@ -55,8 +64,6 @@ public class GameBoard extends Activity implements OnClickListener
         playergrid = new int[10][10];
         aiCell = new Point(4,4);
         plCell = new Point();
-        ai = new aiPlayer();
-        aigrid = ai.aiGrid();
         frame.addView(grid);        
 //        grid.requestFocus();        
     }
@@ -71,6 +78,20 @@ public class GameBoard extends Activity implements OnClickListener
 	public void onClick(View src) {
 		switch(src.getId())
 		{
+		case R.id.Diff:
+			switch (rg.getCheckedRadioButtonId())
+			{
+				case R.id.RB1:
+			        ai = new aiPlayerEasy();
+			        aigrid = ai.aiGrid();
+					break;
+				case R.id.RB2:
+			        ai = new aiPlayer();
+			        aigrid = ai.aiGrid();
+					break;				
+			}
+			buttonDeploy.setEnabled(true);
+			break;
 		case R.id.MM:
 			Intent myIntent = new Intent(GameBoard.this, Battleship.class);
 			GameBoard.this.startActivity(myIntent);
