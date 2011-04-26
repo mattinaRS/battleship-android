@@ -268,7 +268,8 @@ public class GameBoard extends Activity implements OnClickListener
 			endg.putExtra("Win", "You Win");
 			endg.putExtra("turns", turns);
 			endg.putExtra("aiships", numshipsai);
-			endg.putExtra("aiships", numshipspl);			
+			endg.putExtra("aiships", numshipspl);
+			grid.clearFocus();
 			GameBoard.this.startActivity(endg);			
 			GameBoard.this.finish();
 		}
@@ -357,6 +358,7 @@ public class GameBoard extends Activity implements OnClickListener
 			endg.putExtra("turns", turns);
 			endg.putExtra("aiships", numshipsai);
 			endg.putExtra("aiships", numshipspl);			
+			grid.clearFocus();
 			GameBoard.this.startActivity(endg);	
 			this.finish();
 		}		
