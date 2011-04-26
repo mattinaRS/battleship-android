@@ -3,6 +3,7 @@ package org.game.Battleship;
 import org.game.Battleship.Grid.Direction;
 
 import android.graphics.Rect;
+import android.util.Log;
 
 public class Ships
 {
@@ -44,42 +45,47 @@ public class Ships
 	    	hull.set((int) (x * width), (int) (y * height), (int) (x
 	    			* width + width), (int) (y*height + height*size));    
 		}
-		else if(direction == Direction.SOUTH)
+		else
 		{
-	    	hull.set((int) (x * width), (int) (y * height), (int) (x
-	    			* width + width), (int) (y*height - height*size ));    
-		}
-		else if(direction == Direction.EAST)
-		{
+			Log.d("Hull", "EAST");
 	    	hull.set((int) (x * width), (int) (y * height), (int) (x
 	    			* width + width*size), (int) (y*height + height));    
 		}
-		else
-		{
-	    	hull.set((int) (x * width), (int) (y * height), (int) (x
-	    			* width - width*size), (int) (y*height + height));    
-		}
 	}
-	
 	public void move(Direction d)
 	{
    	    switch (d) 
    	    {
     	      case NORTH:
-    	    	  if(iy>10)
-    	    		  iy--;
-    	    	  direction = Direction.NORTH;
+	    	    	  if(iy>10)
+	    	    		  iy--;
     	    	  setRect(ix,iy);
     	          break;
     	      case SOUTH:
-    	    	  if(iy + size< 20)
-    	    		  iy++;
+    	    	  if(direction == Direction.NORTH)
+    	    	  {
+    	    		  if(iy + size< 20)
+    	    			  iy++;
+    	    	  }
+    	    	  else
+    	    	  {
+    	    		  if(iy < 19)
+    	    			  iy++;    	    		  
+    	    	  }
+    	    		  
     	    	  setRect(ix,iy);
     	        break;
     	      case EAST:
-    	    	  if(ix + size < 10)
-    	    		  ix++;
-    	    	  direction = Direction.EAST;
+    	    	  if(direction == Direction.NORTH)
+    	    	  {
+    	    		  if(ix < 9)
+    	    			  ix++;
+    	    	  }
+    	    	  else
+    	    	  {
+    	    		  if(ix + size < 10)
+    	    			  ix++;    	    		  
+    	    	  }
     	    	  setRect(ix,iy);
     	        break;
     	      case WEST:
@@ -100,7 +106,23 @@ public class Ships
 
 	public void animate(Direction d)
 	{
-		
+		switch(d)
+		{
+			case NORTH:
+				if (direction != Direction.NORTH && iy+size<=20)
+				{
+					direction = Direction.NORTH;
+					setRect(ix,iy);
+				}
+				break;
+			case EAST:
+				if (direction != Direction.EAST && ix+size<=10)
+				{
+					direction = Direction.EAST;					
+					setRect(ix,iy);
+				}
+				break;
+		}
 	}
 	public Rect getHull()
 	{

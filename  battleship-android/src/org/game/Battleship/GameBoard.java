@@ -99,12 +99,24 @@ public class GameBoard extends Activity implements OnClickListener
 			break;
 		case R.id.Deploy:
 	        Log.d(TAG, "Deployment ends");
-	        buttonDeploy.setEnabled(false);
 	        playergrid = grid.getPgrid();
-	        grid.setAigrid(aigrid);	        
-	        Log.d("aigrid", gridtoString(aigrid, 10, 10));
-			grid.setDeploy_phase(false);
-			grid.invalidate();
+	        if(validateDeployment())
+	        {
+		        buttonDeploy.setEnabled(false);
+		        grid.setAigrid(aigrid);	        
+		        Log.d("aigrid", gridtoString(aigrid, 10, 10));
+				grid.setDeploy_phase(false);
+				grid.invalidate();
+	        }
+	        else
+	        {
+				alert.setTitle("Invalid Deployment !");
+				alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+					}
+				});
+				alert.show();						        	
+	        }
 //	        grid.requestFocus();        
 	        break;
 		case R.id.Turn:		
@@ -132,6 +144,48 @@ public class GameBoard extends Activity implements OnClickListener
 	        break;
 		}		
 	}
+
+	private boolean validateDeployment() 
+	{
+		int cg, cb, cc, cs, cd;
+		cg = cb = cc = cs = cd = 0;
+		for(int i =0; i<10; i++)
+		{
+			for(int j=0; j<10; j++)
+			{
+				if(playergrid[i][j] == 1)
+				{
+					cc++;
+				}
+				else if(playergrid[i][j] == 2)
+				{
+					cg++;
+				}
+				else if(playergrid[i][j] == 3)
+				{
+					cd++;
+				}
+				else if(playergrid[i][j] == 4)
+				{
+					cs++;
+				}
+				else if(playergrid[i][j] == 5)
+				{
+					cb++;
+				}
+			}
+		}
+		if(cc != pc || cg != pg || cd != pd || cs != ps || cb != pb )
+		{
+			return false;
+		}
+		else
+		{
+			return true;			
+		}
+	}
+
+
 
 	public void updatePlayergrid(Point p) 
 	{

@@ -311,27 +311,35 @@ public class Grid extends View
 	    {
 	    	switch(keyCode)
 	    	{
-		    	case KeyEvent.KEYCODE_DPAD_UP:
+	    		case KeyEvent.KEYCODE_W:
+	    			Log.d("Key", "W");
 			    	invalidate((ships.get(currSelect)).getHull());
 		    		(ships.get(currSelect)).animate(Direction.NORTH);
+			    	invalidate((ships.get(currSelect)).getHull());
+	    			break;
+	    		case KeyEvent.KEYCODE_D:
+	    			Log.d("Key", "D");
+			    	invalidate((ships.get(currSelect)).getHull());
+		    		(ships.get(currSelect)).animate(Direction.EAST);
+			    	invalidate((ships.get(currSelect)).getHull());
+	    			break;
+		    	case KeyEvent.KEYCODE_DPAD_UP:
+			    	invalidate((ships.get(currSelect)).getHull());
 		    		(ships.get(currSelect)).move(Direction.NORTH);	    		
 			    	invalidate((ships.get(currSelect)).getHull());
 		    		break;
 			    case KeyEvent.KEYCODE_DPAD_DOWN:
 			    	invalidate((ships.get(currSelect)).getHull());
-		    		(ships.get(currSelect)).animate(Direction.SOUTH);
 		    		(ships.get(currSelect)).move(Direction.SOUTH);	    		
 			    	invalidate((ships.get(currSelect)).getHull());
 			    	break;
 			    case KeyEvent.KEYCODE_DPAD_LEFT:
 			    	invalidate((ships.get(currSelect)).getHull());
-		    		(ships.get(currSelect)).animate(Direction.WEST);
 		    		(ships.get(currSelect)).move(Direction.WEST);	    		
 			    	invalidate((ships.get(currSelect)).getHull());
 			    	break;
 			    case KeyEvent.KEYCODE_DPAD_RIGHT:
 			    	invalidate((ships.get(currSelect)).getHull());
-		    		(ships.get(currSelect)).animate(Direction.EAST);
 		    		(ships.get(currSelect)).move(Direction.EAST);	    		
 			    	invalidate((ships.get(currSelect)).getHull());
 			    	break;
