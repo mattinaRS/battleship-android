@@ -64,7 +64,6 @@ public class GameBoard extends Activity implements OnClickListener
         playergrid = new int[10][10];
         aiCell = new Point(4,4);
         plCell = new Point();
-        frame.addView(grid);        
 //        grid.requestFocus();        
     }
     
@@ -92,6 +91,7 @@ public class GameBoard extends Activity implements OnClickListener
 			}
 			rb1.setEnabled(false);
 			diff.setEnabled(false);
+	        frame.addView(grid);        
 			buttonDeploy.setEnabled(true);
 			break;
 		case R.id.MM:
