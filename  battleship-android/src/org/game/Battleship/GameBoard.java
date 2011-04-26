@@ -357,7 +357,8 @@ public class GameBoard extends Activity implements OnClickListener
 			endg.putExtra("turns", turns);
 			endg.putExtra("aiships", numshipsai);
 			endg.putExtra("aiships", numshipspl);			
-			GameBoard.this.startActivity(endg);			
+			GameBoard.this.startActivity(endg);	
+			this.finish();
 		}		
 	}
 
