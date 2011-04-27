@@ -22,11 +22,9 @@ public class Battleship extends Activity implements OnClickListener {
         buttonPlay = (Button)findViewById(R.id.play);
         buttonHiscore = (Button)findViewById(R.id.hiscore);
         buttonQuit = (Button)findViewById(R.id.quit);
-//        buttonEnd = (Button)findViewById(R.id.end);
         buttonPlay.setOnClickListener(this);
         buttonHiscore.setOnClickListener(this);
         buttonQuit.setOnClickListener(this);
-//        buttonEnd.setOnClickListener(this);
     }
     
     public void onDestroy(Bundle savedInstanceState) {

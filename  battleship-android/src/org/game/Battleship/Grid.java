@@ -42,6 +42,7 @@ public class Grid extends View
 	private final List<Rect> HitMiss = new ArrayList<Rect>(100);
 	private final List<Integer> target = new ArrayList<Integer>(100);
 	private final List<Rect> HitMissAI = new ArrayList<Rect>(100);
+	private final List<Point> pts = new ArrayList<Point>(100);
 	private final List<Integer> targetAI = new ArrayList<Integer>(100);
 	private Point p = new Point();
 	private int currSelect;
@@ -110,6 +111,7 @@ public class Grid extends View
     public void updateUIonattk(Point p)
     {
     	int x, y;
+    	pts.add(new Point(pattack));
     	x = p.x;
     	y = p.y + 10;
 		Rect r  = new Rect();
@@ -245,10 +247,6 @@ public class Grid extends View
 //			Log.d("aigrid", "in draw");
 			canvas.drawRect(HiList.get(0), dark);
 			Paint selected = new Paint();
-			selected.setColor(getResources().getColor(
-			R.color.battleship_black));
-			selected.setStyle(style);
-			canvas.drawRect(selRect, selected);
 			Rect r = new Rect();
 			Rect sel = new Rect();
 			for(int i=0; i<HitMiss.size(); i++)
@@ -280,7 +278,10 @@ public class Grid extends View
 				}
 					
 			}
-			
+			selected.setColor(getResources().getColor(
+			R.color.battleship_black));
+			selected.setStyle(style);			
+			canvas.drawRect(selRect, selected);
 		}
     }
     
@@ -382,6 +383,15 @@ public class Grid extends View
     private void highlight() 
     {
     	invalidate(selRect);
+    	for(int i =0; i<pts.size(); i++)
+    	{
+    		if(selX == pts.get(i).y && selY == pts.get(i).x)
+    		{
+    			
+        		Log.d("Sely", "In Return");
+    			return;
+    		}
+    	}
    		if((selX == (HiCoord.get(0)).x) && (selY == (HiCoord.get(0)).y) ) 
    		{
 //  			Log.d(TAG, Integer.toString(selX));

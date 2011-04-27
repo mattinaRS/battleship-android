@@ -252,11 +252,6 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				break;
 		}
-//		Log.d("sub", Integer.toString(ps));
-//		Log.d("gb", Integer.toString(pg));
-//		Log.d("carr", Integer.toString(pc));
-//		Log.d("des", Integer.toString(pd));
-//		Log.d("bs", Integer.toString(pb));
 		if(pg == 0 && pb == 0 && pd == 0 && ps == 0 && pc == 0)
 		{
 			endgame = true;
@@ -341,11 +336,6 @@ public class GameBoard extends Activity implements OnClickListener
 				break;
 			}
 		
-//		Log.d("sub", Integer.toString(ais));
-//		Log.d("gb", Integer.toString(aig));
-//		Log.d("carr", Integer.toString(aic));
-//		Log.d("des", Integer.toString(aid));
-//		Log.d("bs", Integer.toString(aib));
 		if(aig == 0 && aib == 0 && aid == 0 && ais == 0 && aic == 0)
 		{
 			endgame = true;
