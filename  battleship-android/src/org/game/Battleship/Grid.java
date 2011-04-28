@@ -112,50 +112,50 @@ public class Grid extends View
     {
     	int x, y;
     	pts.add(new Point(pattack));
-    	x = p.x;
-    	y = p.y + 10;
 		Rect r  = new Rect();
 		Rect sel = new Rect();
-    	if(pgrid[p.x][p.y] == 0)
-    	{
-    		getRect(x,y, r);
-    		HitMiss.add(r);
-    		target.add(0);
-    		invalidate(r);
-    	}
-    	else
-    	{
-    		getRect(x,y, r);
-    		HitMiss.add(r);    		
-    		target.add(1);
-    		invalidate(r);
-    	}
-//    	Log.d("Y", Integer.toString(pattack.y));
-//    	Log.d("X", Integer.toString(pattack.x));
-//    	Log.d("aigrid", Integer.toString(aigrid[pattack.x][pattack.y]));
-//    	Log.d("aigrid", gridtoString(aigrid, 10, 10));
-    	if(aigrid[pattack.x][pattack.y] == 0)
-    	{
-    		Point point = new Point(HiCoord.get(0));
-        	HiList.get(0).setEmpty();
-       		HiCoord.get(0).set(-1, -1);
-    		getRect(point.x,point.y, sel);
-    		HitMissAI.add(sel);
-    		targetAI.add(0);
-    		invalidate(sel);
-    	}
-    	else
-    	{
-//    		Log.d("aigrid", "found ship");
-    		Point point = new Point(HiCoord.get(0));
-        	HiList.get(0).setEmpty();
-       		HiCoord.get(0).set(-1, -1);
-    		getRect(point.x,point.y, sel);
-    		HitMissAI.add(sel);    		
-    		targetAI.add(1);
-    		invalidate(sel);
- //   		Log.d("aigrid", "found ship ends");
-    	}
+		if(p != null)
+		{
+	    	x = p.x;
+	    	y = p.y + 10;
+	    	if(pgrid[p.x][p.y] == 0)
+	    	{
+	    		getRect(x,y, r);
+	    		HitMiss.add(r);
+	    		target.add(0);
+	    		invalidate(r);
+	    	}
+	    	else
+	    	{
+	    		getRect(x,y, r);
+	    		HitMiss.add(r);    		
+	    		target.add(1);
+	    		invalidate(r);
+	    	}
+		}
+		else
+		{
+	    	if(aigrid[pattack.x][pattack.y] == 0)
+	    	{
+	    		Point point = new Point(HiCoord.get(0));
+	        	HiList.get(0).setEmpty();
+	       		HiCoord.get(0).set(-1, -1);
+	    		getRect(point.x,point.y, sel);
+	    		HitMissAI.add(sel);
+	    		targetAI.add(0);
+	    		invalidate(sel);
+	    	}
+	    	else
+	    	{
+	    		Point point = new Point(HiCoord.get(0));
+	        	HiList.get(0).setEmpty();
+	       		HiCoord.get(0).set(-1, -1);
+	    		getRect(point.x,point.y, sel);
+	    		HitMissAI.add(sel);    		
+	    		targetAI.add(1);
+	    		invalidate(sel);
+	    	}
+		}
     }
     
     public Point updateaigrid(int[][] aigrid)
