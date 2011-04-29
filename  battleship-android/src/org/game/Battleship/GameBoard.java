@@ -38,7 +38,7 @@ public class GameBoard extends Activity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameboard);
     	alert = new AlertDialog.Builder(this);	
-//    	sound = new Sounds(this);
+//  	sound = new Sounds(this);
         turns = 0;
         numshipsai = numshipspl = 5;
         buttonEnd = (Button)findViewById(R.id.Turn);

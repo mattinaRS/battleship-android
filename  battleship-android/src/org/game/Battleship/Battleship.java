@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class Battleship extends Activity implements OnClickListener {
 	
-	Button buttonPlay, buttonHiscore, buttonQuit, buttonEnd;
+	Button buttonPlay, buttonHiscore, buttonQuit;
 	Point p = new Point();
 	
     /** Called when the activity is first created. */
@@ -42,11 +42,6 @@ public class Battleship extends Activity implements OnClickListener {
 			Intent hiscore = new Intent(Battleship.this, HighScore.class);
 			Battleship.this.startActivity(hiscore);
 			break;
-/*		case R.id.end:
-			Intent endg = new Intent(Battleship.this, Endgame.class);
-			Battleship.this.startActivity(endg);
-			break;
-*/
 		case R.id.quit:
 			Battleship.this.finish();
 			break;
