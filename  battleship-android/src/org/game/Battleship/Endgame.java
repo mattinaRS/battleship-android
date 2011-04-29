@@ -154,7 +154,7 @@ public class Endgame extends Activity implements OnClickListener
 		case R.id.mainmenu:
 			Intent myIntent = new Intent(Endgame.this, Battleship.class);
 			Endgame.this.startActivity(myIntent);
-			this.finish();
+			Endgame.this.finish();
 			break;		
 		}
 	}
