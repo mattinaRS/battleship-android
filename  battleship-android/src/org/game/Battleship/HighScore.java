@@ -18,7 +18,7 @@ public class HighScore extends Activity{
     	String name, score;
     	Cursor cursor;
     	db = new DBAdapter(this);
-        db = db.open();    	
+        db = db.open();  
         cursor = db.getallScores();
         cursor.moveToLast();
         while(cursor.isBeforeFirst()== false)
