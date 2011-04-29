@@ -352,7 +352,6 @@ public class GameBoard extends Activity implements OnClickListener
 				ais--;
 				if(ais == 0)
 				{
-					Soundmanager.playSound(3,1);					
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A SUBMARINE!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
