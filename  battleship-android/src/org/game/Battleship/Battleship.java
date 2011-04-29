@@ -48,7 +48,7 @@ public class Battleship extends Activity implements OnClickListener {
 			break;
 */
 		case R.id.quit:
-			this.finish();
+			Battleship.this.finish();
 			break;
 		}		
 	}
