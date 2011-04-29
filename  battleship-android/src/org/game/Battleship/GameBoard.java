@@ -316,6 +316,8 @@ public class GameBoard extends Activity implements OnClickListener
 				aig--;
 				if(aig == 0)
 				{
+					sound.loadSound("Destroy");
+					sound.playSound();
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A GUNBOAT !");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -334,6 +336,8 @@ public class GameBoard extends Activity implements OnClickListener
 				aid--;
 				if(aid == 0)
 				{
+					sound.loadSound("Destroy");
+					sound.playSound();
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A DESTROYER!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -352,6 +356,8 @@ public class GameBoard extends Activity implements OnClickListener
 				ais--;
 				if(ais == 0)
 				{
+					sound.loadSound("Destroy");
+					sound.playSound();
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A SUBMARINE!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -370,6 +376,8 @@ public class GameBoard extends Activity implements OnClickListener
 				aib--;
 				if(aib == 0)
 				{
+					sound.loadSound("Destroy");
+					sound.playSound();
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A BATTLESHIP!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -388,6 +396,8 @@ public class GameBoard extends Activity implements OnClickListener
 				aic--;
 				if(aic == 0)
 				{
+					sound.loadSound("Destroy");
+					sound.playSound();
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A CARRIER!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
