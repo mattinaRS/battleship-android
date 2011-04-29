@@ -24,7 +24,7 @@ public class GameBoard extends Activity implements OnClickListener
 	Grid grid;
 	FrameLayout frame; 
 	AbstractAI ai;
-	Sounds sound;
+//	Sounds sound;
 	int numshipsai, numshipspl;
 	int[][] aigrid, playergrid;
 	private Point aiCell, plCell;
@@ -38,7 +38,7 @@ public class GameBoard extends Activity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameboard);
     	alert = new AlertDialog.Builder(this);	
-    	sound = new Sounds(this);
+//    	sound = new Sounds(this);
         turns = 0;
         numshipsai = numshipspl = 5;
         buttonEnd = (Button)findViewById(R.id.Turn);
@@ -309,15 +309,15 @@ public class GameBoard extends Activity implements OnClickListener
 		switch (aigrid[p.x][p.y])
 		{
 			case 0:
-				sound.loadSound("Miss");
-				sound.playSound();
+//				sound.loadSound("Miss");
+//				sound.playSound();
 				break;
 			case 2:
 				aig--;
 				if(aig == 0)
 				{
-					sound.loadSound("Destroy");
-					sound.playSound();
+//					sound.loadSound("Destroy");
+//					sound.playSound();
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A GUNBOAT !");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -328,16 +328,16 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					sound.loadSound("Hit");
-					sound.playSound();
+//					sound.loadSound("Hit");
+//					sound.playSound();
 				}
 				break;
 			case 3:
 				aid--;
 				if(aid == 0)
 				{
-					sound.loadSound("Destroy");
-					sound.playSound();
+//					sound.loadSound("Destroy");
+//					sound.playSound();
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A DESTROYER!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -348,16 +348,16 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					sound.loadSound("Hit");
-					sound.playSound();
+//					sound.loadSound("Hit");
+//					sound.playSound();
 				}
 				break;
 			case 6:
 				ais--;
 				if(ais == 0)
 				{
-					sound.loadSound("Destroy");
-					sound.playSound();
+//					sound.loadSound("Destroy");
+//					sound.playSound();
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A SUBMARINE!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -368,16 +368,16 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					sound.loadSound("Hit");
-					sound.playSound();
+//					sound.loadSound("Hit");
+//					sound.playSound();
 				}
 				break;
 			case 4:
 				aib--;
 				if(aib == 0)
 				{
-					sound.loadSound("Destroy");
-					sound.playSound();
+//					sound.loadSound("Destroy");
+//					sound.playSound();
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A BATTLESHIP!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -388,16 +388,16 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					sound.loadSound("Hit");
-					sound.playSound();
+//					sound.loadSound("Hit");
+//					sound.playSound();
 				}
 				break;
 			case 5:
 				aic--;
 				if(aic == 0)
 				{
-					sound.loadSound("Destroy");
-					sound.playSound();
+//					sound.loadSound("Destroy");
+//					sound.playSound();
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A CARRIER!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -408,8 +408,8 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					sound.loadSound("Hit");
-					sound.playSound();
+//					sound.loadSound("Hit");
+//					sound.playSound();
 				}
 				break;
 			}

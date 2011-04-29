@@ -1,7 +1,5 @@
 package org.game.Battleship;
 
-import java.util.Timer;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
