@@ -24,6 +24,7 @@ public class GameBoard extends Activity implements OnClickListener
 	Grid grid;
 	FrameLayout frame; 
 	AbstractAI ai;
+	Sounds sound;
 	int numshipsai, numshipspl;
 	int[][] aigrid, playergrid;
 	private Point aiCell, plCell;
@@ -37,9 +38,7 @@ public class GameBoard extends Activity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameboard);
     	alert = new AlertDialog.Builder(this);	
-    	Soundmanager.getInstance();
-        Soundmanager.init(this);
-        Soundmanager.loadSounds();
+    	sound = new Sounds(this);
         turns = 0;
         numshipsai = numshipspl = 5;
         buttonEnd = (Button)findViewById(R.id.Turn);
@@ -195,14 +194,14 @@ public class GameBoard extends Activity implements OnClickListener
 		switch (playergrid[p.x][p.y])
 		{
 			case 0:
-				Soundmanager.playSound(2,1);				
+//				sound.loadSound("Miss");
+//				sound.playSound();
 				break;
 			case 1:
 				pc--;
 				if(pc == 0)
 				{
 					numshipspl--;
-					Soundmanager.playSound(3,1);
 					alert.setTitle("YOUR CARRIER WAS DESTROYED!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
@@ -212,7 +211,8 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					Soundmanager.playSound(1, 1);					
+//					sound.loadSound("Hit");
+//					sound.playSound();
 				}
 				break;
 			case 2:
@@ -220,7 +220,6 @@ public class GameBoard extends Activity implements OnClickListener
 				if(pg == 0)
 				{
 					numshipspl--;
-					Soundmanager.playSound(3,1);
 					alert.setTitle("YOUR GUNBOAT WAS DESTROYED!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
@@ -230,7 +229,6 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					Soundmanager.playSound(1, 1);					
 				}
 				break;
 			case 3:
@@ -238,7 +236,6 @@ public class GameBoard extends Activity implements OnClickListener
 				if(ps == 0)
 				{
 					numshipspl--;
-					Soundmanager.playSound(3,1);
 					alert.setTitle("YOUR SUBMARINE WAS DESTROYED!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
@@ -248,7 +245,8 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					Soundmanager.playSound(1, 1);					
+//					sound.loadSound("Hit");
+//					sound.playSound();
 				}
 				break;
 			case 4:
@@ -256,7 +254,6 @@ public class GameBoard extends Activity implements OnClickListener
 				if(pd == 0)
 				{
 					numshipspl--;
-					Soundmanager.playSound(3,1);
 					alert.setTitle("YOUR DESTROYER WAS DESTROYED!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
@@ -266,7 +263,8 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					Soundmanager.playSound(1, 1);					
+//					sound.loadSound("Hit");
+//					sound.playSound();
 				}
 				break;
 			case 5:
@@ -274,7 +272,6 @@ public class GameBoard extends Activity implements OnClickListener
 				if(pb == 0)
 				{
 					numshipspl--;
-					Soundmanager.playSound(3,1);
 					alert.setTitle("YOUR BATTLESHIP WAS DESTROYED!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
@@ -284,7 +281,8 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					Soundmanager.playSound(1, 1);					
+//					sound.loadSound("Hit");
+//					sound.playSound();
 				}
 				break;
 		}
@@ -311,13 +309,13 @@ public class GameBoard extends Activity implements OnClickListener
 		switch (aigrid[p.x][p.y])
 		{
 			case 0:
-				Soundmanager.playSound(2,1);
+				sound.loadSound("Miss");
+				sound.playSound();
 				break;
 			case 2:
 				aig--;
 				if(aig == 0)
 				{
-					Soundmanager.playSound(3,1);					
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A GUNBOAT !");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -328,14 +326,14 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					Soundmanager.playSound(1, 1);					
+					sound.loadSound("Hit");
+					sound.playSound();
 				}
 				break;
 			case 3:
 				aid--;
 				if(aid == 0)
 				{
-					Soundmanager.playSound(3,1);					
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A DESTROYER!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -346,7 +344,8 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					Soundmanager.playSound(1, 1);					
+					sound.loadSound("Hit");
+					sound.playSound();
 				}
 				break;
 			case 6:
@@ -364,7 +363,8 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					Soundmanager.playSound(1, 1);					
+					sound.loadSound("Hit");
+					sound.playSound();
 				}
 				break;
 			case 4:
@@ -372,7 +372,6 @@ public class GameBoard extends Activity implements OnClickListener
 				if(aib == 0)
 				{
 					numshipsai--;
-					Soundmanager.playSound(3,1);					
 					alert.setTitle("YOU DESTROYED A BATTLESHIP!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int whichButton) {
@@ -382,14 +381,14 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					Soundmanager.playSound(1, 1);					
+					sound.loadSound("Hit");
+					sound.playSound();
 				}
 				break;
 			case 5:
 				aic--;
 				if(aic == 0)
 				{
-					Soundmanager.playSound(3,1);					
 					numshipsai--;
 					alert.setTitle("YOU DESTROYED A CARRIER!");
 					alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -400,7 +399,8 @@ public class GameBoard extends Activity implements OnClickListener
 				}
 				else
 				{
-					Soundmanager.playSound(1, 1);					
+					sound.loadSound("Hit");
+					sound.playSound();
 				}
 				break;
 			}
